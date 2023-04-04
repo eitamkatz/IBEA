@@ -72,5 +72,17 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, newZ);
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Block"))
+        {
+            // Vector3 contactPoint = col.ClosestPoint(transform.position);
+            // print("contact point "+contactPoint);
+            // print("player "+col.transform.position);
+            // Vector3 direction = (contactPoint - col.transform.position).normalized;
+            print(direction);
+            col.transform.position += (Vector3)direction;
+        }    
+    }
 }
