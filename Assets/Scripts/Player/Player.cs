@@ -64,15 +64,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    // private void RotationPlayer()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         print("hi");
-    //         float newZ = transform.rotation.z - 90f;
-    //             
-    //         transform.rotation = Quaternion.Euler(0f, 0f, newZ);
-    //     }
-    // }
+    private void RotationPlayer()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            float newZ = transform.rotation.eulerAngles.z - 90f;
+            transform.rotation = Quaternion.Euler(0f, 0f, newZ);
+        }
+    }
     
 }
