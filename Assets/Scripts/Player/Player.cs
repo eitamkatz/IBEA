@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        print(col.gameObject.CompareTag("Block"));
         if (col.gameObject.CompareTag("Block"))
         {
             // Vector3 contactPoint = col.ClosestPoint(transform.position);
@@ -83,6 +84,7 @@ public class Player : MonoBehaviour
             // Vector3 direction = (contactPoint - col.transform.position).normalized;
             print(direction);
             col.transform.position += (Vector3)direction;
+            col.tag = "Player";
         }    
     }
 }

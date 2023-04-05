@@ -11,7 +11,6 @@ public class Block : MonoBehaviour
         if (other.gameObject.tag.Equals("Player"))
         {
             transform.SetParent(other.transform);
-            tag = "Player";
         }    
     }
 }
