@@ -45,9 +45,14 @@ public class Player : MonoBehaviour
     {
         if(!transform.Find(toMerge.name))
         {   
+            
             // moving the new game object to his right position
             toMerge.transform.position += (Vector3)direction;
             // merge the new game object to the player
+            for (int i = 0; i < toMerge.transform.childCount; i++)
+            {
+                toMerge.transform.GetChild(i).tag = "Player";
+            }
             toMerge.tag = "Player";
             toMerge.transform.SetParent(transform);
         }
