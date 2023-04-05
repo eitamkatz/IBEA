@@ -12,11 +12,18 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Player : MonoBehaviour
 {
-    private Vector2 direction = Vector2.zero;
+    public static Player Shared { get; private set; }
+
+    public Vector2 direction = Vector2.zero;
     // private bool flag = true;
     private float timer;
     [SerializeField] float speed = 0.05f;
     // [SerializeField] private float speed = 1f;
+
+    private void Awake()
+    {
+        Shared = this;
+    }
 
     private void Start()
     {
@@ -31,11 +38,20 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         UpdateDirection();
-        // StartCoroutine(UpdateDirection());
     }
 
+    public void MergeShapes(GameObject toMerge)
+    {
+        if(!transform.Find(toMerge.name))
+        {   
+            // moving the new game object to his right position
+            toMerge.transform.position += (Vector3)direction;
+            // merge the new game object to the player
+            toMerge.tag = "Player";
+            toMerge.transform.SetParent(transform);
+        }
+    }
 
     private void CheckInput()
     {
@@ -75,16 +91,9 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        print(col.gameObject.CompareTag("Block"));
         if (col.gameObject.CompareTag("Block"))
         {
-            // Vector3 contactPoint = col.ClosestPoint(transform.position);
-            // print("contact point "+contactPoint);
-            // print("player "+col.transform.position);
-            // Vector3 direction = (contactPoint - col.transform.position).normalized;
-            print(direction);
-            col.transform.position += (Vector3)direction;
-            col.tag = "Player";
+            MergeShapes(col.gameObject);
         }    
     }
 }
