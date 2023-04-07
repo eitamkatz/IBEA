@@ -94,11 +94,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.CompareTag("Block"))
-        {
-            MergeShapes(col.gameObject);
-        }    
-    }
+    // private void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     if (col.gameObject.CompareTag("Block"))
+    //     {
+    //         MergeShapes(col.gameObject);
+    //     }    
+    // }
 }
