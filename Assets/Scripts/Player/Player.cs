@@ -15,20 +15,23 @@ public class Player : MonoBehaviour
     public static Player Shared { get; private set; }
 
     public Vector2 direction = Vector2.zero;
-    // private bool flag = true;
     private float timer;
     [SerializeField] float speed = 0.05f;
-    // [SerializeField] private float speed = 1f;
+    private int childIndex = 0;
+    private bool isMooving;
+    private Vector3 orignalPosition;
+    private Vector3 targetPosition;
+    private float timeToMove = 0.2f;
 
     private void Awake()
     {
         Shared = this;
     }
 
-    private void Start()
-    {
-        timer = Time.time;
-    }
+    // private void Start()
+    // {
+    //     timer = Time.time;
+    // }
 
     private void Update()
     {
@@ -36,10 +39,10 @@ public class Player : MonoBehaviour
         RotationPlayer();
     }
 
-    private void FixedUpdate()
-    {
-        UpdateDirection();
-    }
+    // private void FixedUpdate()
+    // {
+    //     UpdateDirection();
+    // }
 
     public void MergeShapes(GameObject toMerge)
     {
@@ -47,7 +50,7 @@ public class Player : MonoBehaviour
         {   
             
             // moving the new game object to his right position
-            toMerge.transform.position += (Vector3)direction;
+            // toMerge.transform.position += (Vector3)direction;
             // merge the new game object to the player
             for (int i = 0; i < toMerge.transform.childCount; i++)
             {
@@ -69,8 +72,9 @@ public class Player : MonoBehaviour
             direction = Vector2.up;
         else if (Input.GetKeyDown(KeyCode.DownArrow))
             direction = Vector2.down;
-        // else 
-        //     direction = Vector2.zero;
+        
+        if(!isMooving)
+            StartCoroutine(UpdateMovement(direction));
     }
 
     private void UpdateDirection()
@@ -84,6 +88,26 @@ public class Player : MonoBehaviour
             timer = Time.time;
         }
     }
+    
+    private IEnumerator UpdateMovement(Vector3 moveDirection)
+    {
+        if (Time.time - timer > speed)
+            isMooving = true;
+        float loopTime = 0f;
+
+        orignalPosition = transform.position;
+        targetPosition = orignalPosition + moveDirection;
+
+        while (loopTime < timeToMove)
+        {
+            transform.position = Vector3.Lerp(orignalPosition, targetPosition,
+                loopTime / timeToMove);
+            loopTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = targetPosition;
+        isMooving = false;
+    }
 
     private void RotationPlayer()
     {
@@ -94,11 +118,5 @@ public class Player : MonoBehaviour
         }
     }
 
-    // private void OnTriggerEnter2D(Collider2D col)
-    // {
-    //     if (col.gameObject.CompareTag("Block"))
-    //     {
-    //         MergeShapes(col.gameObject);
-    //     }    
-    // }
+    
 }

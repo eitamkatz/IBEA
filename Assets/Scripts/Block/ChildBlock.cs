@@ -11,6 +11,8 @@ public class ChildBlock : MonoBehaviour
         if (other.gameObject.tag.Equals("Player"))
         {
             Player.Shared.MergeShapes(gameObject.transform.parent.gameObject);
+            StartCoroutine(
+                UpdatePosition(gameObject.transform.parent.gameObject));
         }
         else if (other.gameObject.CompareTag("Bomb"))
         {
@@ -26,5 +28,14 @@ public class ChildBlock : MonoBehaviour
         // gameObject.SetActive(false);
         yield return new WaitForSeconds(PARTICLE_DELAY);
         Destroy(gameObject);
+    }
+    
+    private IEnumerator UpdatePosition(GameObject parent)
+    {
+        yield return new WaitForSeconds(0.03f);
+        parent.transform.localPosition = new Vector3(
+            Mathf.Round(parent.transform.localPosition.x),
+            Mathf.Round(parent.transform.localPosition.y), 0f);
+        // print(parent.name);
     }
 }
