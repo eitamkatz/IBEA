@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    private float timer;
+    private float dieTime = 10f;
+    private void Start()
     {
-        if (other.gameObject.tag.Equals("Player"))
-        {
-            Player.Shared.MergeShapes(gameObject);
-        }    
+        timer = Time.time;
     }
+
+    private void Update()
+    {
+        if (Time.time - timer > dieTime && !transform.parent)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
 }

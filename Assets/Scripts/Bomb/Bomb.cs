@@ -8,12 +8,30 @@ using Random = UnityEngine.Random;
 public class Bomb : MonoBehaviour
 {
     private const float DELAY_DESTROY = 0.2f;
+    private float timer;
+    private float dieTime = 10f;
+    private void Start()
+    {
+        timer = Time.time;
+    }
+
+    private void Update()
+    {
+        if (Time.time - timer > dieTime && !transform.parent)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         
-        if (col.transform.CompareTag("Player"))
+        if (col.CompareTag("Player"))
         {
             StartCoroutine(DestroyBomb());
+        }
+        else if (col.CompareTag("Block"))
+        {
+            Destroy(gameObject);
         }
     }
 

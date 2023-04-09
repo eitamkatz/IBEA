@@ -35,16 +35,13 @@ public class Player : MonoBehaviour
     
     public void MergeShapes(GameObject toMerge)
     {
-        if(!transform.Find(toMerge.name))
+        // merge the new game object to the player
+        for (int i = 0; i < toMerge.transform.childCount; i++)
         {
-            // merge the new game object to the player
-            for (int i = 0; i < toMerge.transform.childCount; i++)
-            {
-                toMerge.transform.GetChild(i).tag = "Player";
-            }
-            toMerge.tag = "Player";
-            toMerge.transform.SetParent(transform);
+            toMerge.transform.GetChild(i).tag = "Player";
         }
+        toMerge.tag = "Player";
+        toMerge.transform.SetParent(transform);
     }
 
     private void CheckInput()

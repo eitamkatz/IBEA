@@ -6,6 +6,7 @@ using UnityEngine;
 public class ChildBlock : MonoBehaviour
 {
     private const float PARTICLE_DELAY = 1f;
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag.Equals("Player"))
@@ -14,7 +15,7 @@ public class ChildBlock : MonoBehaviour
             StartCoroutine(
                 UpdatePosition(gameObject.transform.parent.gameObject));
         }
-        else if (other.gameObject.CompareTag("Bomb"))
+        if (other.gameObject.CompareTag("Bomb"))
         {
             StartCoroutine(DestroySquare());
         }
@@ -37,4 +38,6 @@ public class ChildBlock : MonoBehaviour
             Mathf.Round(parent.transform.localPosition.y), 0f);
         // print(parent.name);
     }
+
+    
 }
