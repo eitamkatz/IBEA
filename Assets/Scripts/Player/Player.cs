@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public Vector2 direction = Vector2.zero;
     private float timer;
     [SerializeField] float speed = 0.05f;
-    private int childIndex = 0;
     private bool isMooving;
     private Vector3 orignalPosition;
     private Vector3 targetPosition;
@@ -28,29 +27,16 @@ public class Player : MonoBehaviour
         Shared = this;
     }
 
-    // private void Start()
-    // {
-    //     timer = Time.time;
-    // }
-
     private void Update()
     {
         CheckInput();
         RotationPlayer();
     }
-
-    // private void FixedUpdate()
-    // {
-    //     UpdateDirection();
-    // }
-
+    
     public void MergeShapes(GameObject toMerge)
     {
         if(!transform.Find(toMerge.name))
-        {   
-            
-            // moving the new game object to his right position
-            // toMerge.transform.position += (Vector3)direction;
+        {
             // merge the new game object to the player
             for (int i = 0; i < toMerge.transform.childCount; i++)
             {
@@ -77,18 +63,6 @@ public class Player : MonoBehaviour
             StartCoroutine(UpdateMovement(direction));
     }
 
-    private void UpdateDirection()
-    {
-        if (Time.time - timer > speed)
-        {
-            Vector3 position = new Vector3(
-                Mathf.Round(transform.position.x) + direction.x,
-                Mathf.Round(transform.position.y) + direction.y, 0.0f);
-            transform.position = position;
-            timer = Time.time;
-        }
-    }
-    
     private IEnumerator UpdateMovement(Vector3 moveDirection)
     {
         if (Time.time - timer > speed)
@@ -117,6 +91,4 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, newZ);
         }
     }
-
-    
 }

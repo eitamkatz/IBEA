@@ -22,7 +22,6 @@ public class ChildBlock : MonoBehaviour
     
     private IEnumerator DestroySquare()
     {
-        print(transform.name);
         GetComponent<ParticleSystem>().Play();
         GetComponent<SpriteRenderer>().enabled = false;
         // gameObject.SetActive(false);
