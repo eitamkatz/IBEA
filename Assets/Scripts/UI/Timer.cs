@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     private float _timeLeft = 60;
     private bool _timerOn;
     [SerializeField] private Text timerText;
-    
+    [SerializeField] private GameManager _gameManager;
     void Start()
     {
         _timerOn = true;
@@ -28,7 +28,7 @@ public class Timer : MonoBehaviour
             else
             {
                 Debug.Log("TIME'S UP!"); // for testing! 
-                // TODO: add call to GameManager function that checks if the current shape fits the goal shape at the end of a level
+                _gameManager.EndOfLevel();
                 _timeLeft = 0;
                 _timerOn = false;
             }

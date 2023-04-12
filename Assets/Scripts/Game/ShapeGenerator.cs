@@ -8,7 +8,7 @@ using Random = Unity.Mathematics.Random;
 
 public class ShapeGenerator : MonoBehaviour
 {
-    private Random _random = new Random(123);
+    private Random _random = new Random(1);
     private int[,] _shape; // generated shape
     private List<int[]> _availableSpots; // spots available to place a block
     private int[][][] _blocks =

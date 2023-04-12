@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,20 +42,20 @@ public class GameManager : MonoBehaviour
      * if the shapes match, the player moves on to the next level.
      * if not - the game is over.
      */
-    // public void EndOfLevel()
-    // {
-    //     if (_player.CheckShapeMatch(_goalShape))
-    //     {
-    //         print("LEVEL COMPLETE!");
-    //         _level++;
-    //         InitializeLevel(_level);
-    //     }
-    //     else
-    //     {
-    //         print("GAME OVER");
-    //         // TODO: add try again screen
-    //     }
-    // }
+    public void EndOfLevel()
+    {
+        // if (_player.CheckShapeMatch(_goalShape))
+        // {
+        //     print("LEVEL COMPLETE!");
+        //     _level++;
+        //     InitializeLevel(_level);
+        // }
+        // else
+        // {
+            print("GAME OVER");
+            SceneManager.LoadScene("GameOver");
+            // }
+    }
     
     /*
      * prints a given shape (for testing!)
