@@ -5,23 +5,56 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private int _level = 1;
+    private int _level;
+    private int _gridSize;
     private int[,] _goalShape;
-    [SerializeField] private ShapeGenerator shapeGenerator;
+    private int _timer;
+    [SerializeField] private ShapeDisplay _shapeDisplay;
+    [SerializeField] private ShapeGenerator _shapeGenerator;
+    [SerializeField] private Player _player;
 
     void Start()
     {
-        InitializeLevel();
-        PrintShape(_goalShape);
+        _level = 1;
+        _gridSize = 5;
+        InitializeLevel(_level);
+        // PrintShape(_goalShape);
     }
 
     /*
      * Initializes the level 
      */
-    void InitializeLevel()
+    void InitializeLevel(int level)
     {
-        _goalShape = shapeGenerator.GenerateShape(_level);
+        print("LEVEL " + level);
+        if (level % 5 == 0)
+        {
+            _gridSize += 2;
+            _shapeDisplay.UpdateGrid(_gridSize);
+        }
+        _goalShape = _shapeGenerator.GenerateShape(_level, _gridSize);
+        _shapeDisplay.DisplayShape(_goalShape);
     }
+    
+    /*
+     * checks if the win condition is met at the end of a level
+     * if the shapes match, the player moves on to the next level.
+     * if not - the game is over.
+     */
+    // public void EndOfLevel()
+    // {
+    //     if (_player.CheckShapeMatch(_goalShape))
+    //     {
+    //         print("LEVEL COMPLETE!");
+    //         _level++;
+    //         InitializeLevel(_level);
+    //     }
+    //     else
+    //     {
+    //         print("GAME OVER");
+    //         // TODO: add try again screen
+    //     }
+    // }
     
     /*
      * prints a given shape (for testing!)

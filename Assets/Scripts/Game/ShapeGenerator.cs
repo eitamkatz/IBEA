@@ -10,7 +10,6 @@ public class ShapeGenerator : MonoBehaviour
 {
     private Random _random = new Random(123);
     private int[,] _shape; // generated shape
-    private int _size = 5; 
     private List<int[]> _availableSpots; // spots available to place a block
     private int[][][] _blocks =
     {
@@ -142,10 +141,9 @@ public class ShapeGenerator : MonoBehaviour
     /*
      * generates a single shape made up of randomized tetrominoes 
      */
-    public int[,] GenerateShape(int level)
+    public int[,] GenerateShape(int level, int gridSize)
     {
-        if (level % 5 == 0) _size += 5;
-        _shape = new int[_size,_size];
+        _shape = new int[gridSize, gridSize];
         _availableSpots = new List<int[]>();
         TakeSpot(0, 0);
         while (level > 0)
