@@ -27,6 +27,7 @@ public class ChildBlock : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         // gameObject.SetActive(false);
         yield return new WaitForSeconds(PARTICLE_DELAY);
+        Player.Shared.squareCount--;
         Destroy(gameObject);
     }
     
@@ -36,7 +37,6 @@ public class ChildBlock : MonoBehaviour
         parent.transform.localPosition = new Vector3(
             Mathf.Round(parent.transform.localPosition.x),
             Mathf.Round(parent.transform.localPosition.y), 0f);
-        // print(parent.name);
     }
 
     

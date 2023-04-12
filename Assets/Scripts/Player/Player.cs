@@ -13,15 +13,16 @@ using Vector3 = UnityEngine.Vector3;
 public class Player : MonoBehaviour
 {
     public static Player Shared { get; private set; }
-
     public Vector2 direction = Vector2.zero;
-    private float timer;
+    public int squareCount = 1;
     [SerializeField] float speed = 0.05f;
     private bool isMooving;
     private Vector3 orignalPosition;
     private Vector3 targetPosition;
     private float timeToMove = 0.2f;
-
+    private float timer;
+    private Vector2[] corners;
+    
     private void Awake()
     {
         Shared = this;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < toMerge.transform.childCount; i++)
         {
             toMerge.transform.GetChild(i).tag = "Player";
+            squareCount++;
         }
         toMerge.tag = "Player";
         toMerge.transform.SetParent(transform);
@@ -88,4 +90,41 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, newZ);
         }
     }
+
+    //target- array of the target shape 
+    //n- the length of the target shape
+    //dstSquareCount- the number of squares on the target shape
+    public bool FinalShape(int[][] target, int n, int dstSquareCount)
+    {
+        if (dstSquareCount != squareCount) return false;
+        // initialize the indexes from the center to the top left corner
+        int xIndex = - n / 2 + 1;
+        int yIndex = - n / 2 + 1;
+        //moving on all the connects shapes
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform currentChild = transform.GetChild(i);
+            xIndex = (int)currentChild.localPosition.x;
+            yIndex = (int)currentChild.localPosition.y;
+            // moving on all the squares of the current shape
+            for (int j = 0; j < currentChild.childCount; j++)
+            {
+                Transform currentSquare = currentChild.GetChild(j);
+                Vector2 index = currentSquare.localPosition;
+                xIndex += (int)index.x;
+                yIndex += (int)index.y;
+                
+                if (!MatchCheck(xIndex, yIndex, n-1, target[xIndex][yIndex]))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    private bool MatchCheck(int xIndex, int yIndex, int n, int hasSquare)
+    {    
+        // return false if the currentSquare location doesnt match the target shape or the current square is off limits
+        return !(xIndex < 0 || xIndex > n || yIndex < 0 || yIndex > n || hasSquare == 0);
+    }
+    
 }
