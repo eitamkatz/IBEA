@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -16,14 +17,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private Timer _timer;
 
-    void Start()
+    private void Start()
     {
         _level = 1;
         _gridSize = 5;
         _levelTime = 60;
         _numOfSquares = 4 * _level + 1;
+        _numOfSquares = 1;
         InitializeLevel(_level);
         // PrintShape(_goalShape);
+    }
+
+    private void Update()
+    {
+        if (Player.Shared.endOfLevel)
+            EndOfLevel();
     }
 
     /*
@@ -38,8 +46,8 @@ public class GameManager : MonoBehaviour
             _shapeDisplay.UpdateGrid(_gridSize);
         }
         _goalShape = _shapeGenerator.GenerateShape(_level, _gridSize);
-        _shapeDisplay.DisplayShape(_goalShape);
-        _timer.StartTimer(_levelTime);
+        // _shapeDisplay.DisplayShape(_goalShape);
+        // _timer.StartTimer(_levelTime);
     }
     
     /*
@@ -49,7 +57,7 @@ public class GameManager : MonoBehaviour
      */
     public void EndOfLevel()
     {
-        if (_player.FinalShape(_goalShape, _gridSize, _numOfSquares))
+        if (_player.FinalShape(_goalShape, _numOfSquares))
         {
             print("LEVEL COMPLETE!");
             _level++;

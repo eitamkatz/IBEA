@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public Vector2 direction = Vector2.zero;
     public int squareCount = 1;
     public bool winCheck = false;
+    public bool endOfLevel = false;
     [SerializeField] private float speed = 0.05f;
     private bool _isMooving;
     private Vector3 _orignalPosition;
@@ -108,6 +109,9 @@ public class Player : MonoBehaviour
         }
         transform.position = _targetPosition;
         _isMooving = false;
+
+        if (winCheck)
+            endOfLevel = true;
     }
 
 
