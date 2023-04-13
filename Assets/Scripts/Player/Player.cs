@@ -115,8 +115,9 @@ public class Player : MonoBehaviour
     //target- array of the target shape 
     //n- the length of the target shape
     //dstSquareCount- the number of squares on the target shape
-    public bool FinalShape(int[,] target, int n, int dstSquareCount)
+    public bool FinalShape(int[,] target, int dstSquareCount)
     {
+        int n = target.GetLength(0);
         if (dstSquareCount != squareCount) return false;
         // initialize the indexes from the center to the top left corner
         int xIndex = - n / 2 + 1;
