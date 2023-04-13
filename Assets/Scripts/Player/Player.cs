@@ -16,12 +16,11 @@ public class Player : MonoBehaviour
     public Vector2 direction = Vector2.zero;
     public int squareCount = 1;
     [SerializeField] float speed = 0.05f;
-    private bool isMooving;
-    private Vector3 orignalPosition;
-    private Vector3 targetPosition;
-    private float timeToMove = 0.2f;
-    private float timer;
-    private Vector2[] corners;
+    private bool _isMooving;
+    private Vector3 _orignalPosition;
+    private Vector3 _targetPosition;
+    private float _timeToMove = 0.2f;
+    private float _timer;
     
     private void Awake()
     {
@@ -62,7 +61,7 @@ public class Player : MonoBehaviour
             StartCoroutine(RotationPlayer(direction));
             direction = Vector2.zero;
         }
-        if(!isMooving)
+        if(!_isMooving)
             StartCoroutine(UpdateMovement(direction));
     }
     
@@ -86,22 +85,22 @@ public class Player : MonoBehaviour
 
     private IEnumerator UpdateMovement(Vector3 moveDirection)
     {
-        if (Time.time - timer > speed)
-            isMooving = true;
+        if (Time.time - _timer > speed)
+            _isMooving = true;
         float loopTime = 0f;
 
-        orignalPosition = transform.position;
-        targetPosition = orignalPosition + moveDirection;
+        _orignalPosition = transform.position;
+        _targetPosition = _orignalPosition + moveDirection;
 
-        while (loopTime < timeToMove)
+        while (loopTime < _timeToMove)
         {
-            transform.position = Vector3.Lerp(orignalPosition, targetPosition,
-                loopTime / timeToMove);
+            transform.position = Vector3.Lerp(_orignalPosition, _targetPosition,
+                loopTime / _timeToMove);
             loopTime += Time.deltaTime;
             yield return null;
         }
-        transform.position = targetPosition;
-        isMooving = false;
+        transform.position = _targetPosition;
+        _isMooving = false;
     }
 
 

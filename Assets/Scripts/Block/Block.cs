@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private float timer;
-    private float dieTime = 10f;
+    private float _timer;
+    private float _dieTime = 10f;
     private void Start()
     {
-        timer = Time.time;
+        _timer = Time.time;
     }
 
     private void Update()
     {
-        if (Time.time - timer > dieTime && !transform.parent)
+        if (Time.time - _timer > _dieTime && !transform.parent)
         {
             Destroy(gameObject);
         }
