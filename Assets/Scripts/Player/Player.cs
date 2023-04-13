@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
     //target- array of the target shape 
     //n- the length of the target shape
     //dstSquareCount- the number of squares on the target shape
-    public bool FinalShape(int[][] target, int n, int dstSquareCount)
+    public bool FinalShape(int[,] target, int n, int dstSquareCount)
     {
         if (dstSquareCount != squareCount) return false;
         // initialize the indexes from the center to the top left corner
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
                 xIndex += (int)index.x;
                 yIndex += (int)index.y;
                 
-                if (!MatchCheck(xIndex, yIndex, n-1, target[xIndex][yIndex]))
+                if (!MatchCheck(xIndex, yIndex, n-1, target[xIndex, yIndex]))
                     return false;
             }
         }

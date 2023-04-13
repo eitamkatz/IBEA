@@ -9,15 +9,19 @@ public class GameManager : MonoBehaviour
     private int _level;
     private int _gridSize;
     private int[,] _goalShape;
-    private int _timer;
+    private int _numOfSquares;
+    private int _levelTime;
     [SerializeField] private ShapeDisplay _shapeDisplay;
     [SerializeField] private ShapeGenerator _shapeGenerator;
     [SerializeField] private Player _player;
+    [SerializeField] private Timer _timer;
 
     void Start()
     {
         _level = 1;
         _gridSize = 5;
+        _levelTime = 60;
+        _numOfSquares = 4 * _level + 1;
         InitializeLevel(_level);
         // PrintShape(_goalShape);
     }
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
         }
         _goalShape = _shapeGenerator.GenerateShape(_level, _gridSize);
         _shapeDisplay.DisplayShape(_goalShape);
+        _timer.StartTimer(_levelTime);
     }
     
     /*
@@ -44,17 +49,17 @@ public class GameManager : MonoBehaviour
      */
     public void EndOfLevel()
     {
-        // if (_player.CheckShapeMatch(_goalShape))
-        // {
-        //     print("LEVEL COMPLETE!");
-        //     _level++;
-        //     InitializeLevel(_level);
-        // }
-        // else
-        // {
+        if (_player.FinalShape(_goalShape, _gridSize, _numOfSquares))
+        {
+            print("LEVEL COMPLETE!");
+            _level++;
+            InitializeLevel(_level);
+        }
+        else
+        {
             print("GAME OVER");
             SceneManager.LoadScene("GameOver");
-            // }
+        }
     }
     
     /*

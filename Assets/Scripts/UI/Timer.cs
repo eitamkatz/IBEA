@@ -11,8 +11,10 @@ public class Timer : MonoBehaviour
     private bool _timerOn;
     [SerializeField] private Text timerText;
     [SerializeField] private GameManager _gameManager;
-    void Start()
+    
+    public void StartTimer(int timeLeft)
     {
+        _timeLeft = timeLeft;
         _timerOn = true;
     }
     
