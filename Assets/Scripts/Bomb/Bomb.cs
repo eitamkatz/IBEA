@@ -37,7 +37,7 @@ public class Bomb : MonoBehaviour
 
     private IEnumerator DestroyBomb()
     {
-        GetComponent<CircleCollider2D>().radius *= Random.Range(1f, 2f);
+        // GetComponent<CircleCollider2D>().radius = Random.Range(1f, 1f);
         GetComponent<SpriteRenderer>().enabled = false;
         
         yield return new WaitForSeconds(DELAY_DESTROY);

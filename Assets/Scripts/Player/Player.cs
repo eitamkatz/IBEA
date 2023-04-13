@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         CheckInput();
-        RotationPlayer();
+        // RotationPlayer();
     }
     
     public void MergeShapes(GameObject toMerge)
@@ -57,9 +57,31 @@ public class Player : MonoBehaviour
             direction = Vector2.up;
         else if (Input.GetKeyDown(KeyCode.DownArrow))
             direction = Vector2.down;
-        
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(RotationPlayer(direction));
+            direction = Vector2.zero;
+        }
         if(!isMooving)
             StartCoroutine(UpdateMovement(direction));
+    }
+    
+    private IEnumerator RotationPlayer(Vector2 prevDirection)
+    {
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = startRotation * Quaternion.Euler(0f, 0f, -90f);
+        float rotateTime = 0.3f; // Time to complete the rotation (in seconds)
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rotateTime)
+        {
+            float t = elapsedTime / rotateTime;
+            transform.rotation = Quaternion.Lerp(startRotation, endRotation, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        direction = prevDirection;
+        transform.rotation = endRotation;
     }
 
     private IEnumerator UpdateMovement(Vector3 moveDirection)
@@ -82,14 +104,7 @@ public class Player : MonoBehaviour
         isMooving = false;
     }
 
-    private void RotationPlayer()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            float newZ = transform.rotation.eulerAngles.z - 90f;
-            transform.rotation = Quaternion.Euler(0f, 0f, newZ);
-        }
-    }
+
 
     //target- array of the target shape 
     //n- the length of the target shape
