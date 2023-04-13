@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     public static Player Shared { get; private set; }
     public Vector2 direction = Vector2.zero;
     public int squareCount = 1;
-    [SerializeField] float speed = 0.05f;
+    public bool winCheck = false;
+    [SerializeField] private float speed = 0.05f;
     private bool _isMooving;
     private Vector3 _orignalPosition;
     private Vector3 _targetPosition;
@@ -47,6 +48,12 @@ public class Player : MonoBehaviour
 
     private void CheckInput()
     {
+        if (winCheck)
+        {
+            direction = Vector2.zero;
+            return;
+        }
+        
         if (Input.GetKeyDown(KeyCode.RightArrow)) 
             direction = Vector2.right;
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -133,6 +140,12 @@ public class Player : MonoBehaviour
             }
         }
         return true;
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+            winCheck = true;
     }
 
     private bool MatchCheck(int xIndex, int yIndex, int n, int hasSquare)

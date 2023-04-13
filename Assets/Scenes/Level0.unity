@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2155995286416836975, guid: 6c6a1c249f4664a4cb4a7bbddb3f8f74, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2155995286416836975, guid: 6c6a1c249f4664a4cb4a7bbddb3f8f74, type: 3}
       propertyPath: m_IsTrigger
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 1778331850}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,10 +583,10 @@ PolygonCollider2D:
       - {x: 23, y: 10.5}
       - {x: 23, y: -10.5}
       - {x: 7, y: -10.5}
-      - {x: 7, y: -0.5}
-      - {x: 8, y: -0.5}
-      - {x: 8, y: 0.5}
-      - {x: 7, y: 0.5}
+      - {x: 7, y: -0.51}
+      - {x: 7, y: -0.51}
+      - {x: 7, y: 0.51}
+      - {x: 7, y: 0.51}
 --- !u!4 &1778331849
 Transform:
   m_ObjectHideFlags: 0
@@ -595,7 +595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778331847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

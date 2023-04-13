@@ -15,9 +15,13 @@ public class ChildBlock : MonoBehaviour
             StartCoroutine(
                 UpdatePosition(gameObject.transform.parent.gameObject));
         }
-        if (other.gameObject.CompareTag("Bomb"))
+        else if (other.gameObject.CompareTag("Bomb"))
         {
             StartCoroutine(DestroySquare());
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            Player.Shared.winCheck = true;
         }
     }
     
