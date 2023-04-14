@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
             else
             {
                 Debug.Log("TIME'S UP!"); // for testing! 
-                _gameManager.EndOfLevel();
+                _gameManager.GameOver();
                 _timeLeft = 0;
                 _timerOn = false;
             }

@@ -8,22 +8,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int _level;
-    private int _gridSize;
     private int[,] _goalShape;
     private int _numOfSquares;
     private int _levelTime;
-    [SerializeField] private ShapeDisplay _shapeDisplay;
-    [SerializeField] private ShapeGenerator _shapeGenerator;
+    // [SerializeField] private ShapeDisplay _shapeDisplay;
+    // [SerializeField] private ShapeGenerator _shapeGenerator;
+    [SerializeField] private Levels _levels;
     [SerializeField] private Player _player;
     [SerializeField] private Timer _timer;
 
     private void Start()
     {
-        _level = 1;
-        _gridSize = 5;
-        _levelTime = 60;
-        _numOfSquares = 4 * _level + 1;
-        _numOfSquares = 1;
+        _level = 0;
         InitializeLevel(_level);
         // PrintShape(_goalShape);
     }
@@ -31,7 +27,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (Player.Shared.endOfLevel)
-            EndOfLevel();
+           CheckWin();
     }
 
     /*
@@ -40,33 +36,29 @@ public class GameManager : MonoBehaviour
     void InitializeLevel(int level)
     {
         print("LEVEL " + level);
-        if (level % 5 == 0)
-        {
-            _gridSize += 2;
-            _shapeDisplay.UpdateGrid(_gridSize);
-        }
-        _goalShape = _shapeGenerator.GenerateShape(_level, _gridSize);
+        _goalShape = _levels.GetLevelShape(_level);
+        _numOfSquares = _levels.GetLevelNumOfSquares(_level);
+        // _shapeDisplay.UpdateGrid(_gridSize);
         // _shapeDisplay.DisplayShape(_goalShape);
-        // _timer.StartTimer(_levelTime);
+        _levelTime = _levels.GetLevelTime(_level);
+        _timer.StartTimer(_levelTime);
     }
     
     /*
-     * checks if the win condition is met at the end of a level
-     * if the shapes match, the player moves on to the next level.
-     * if not - the game is over.
+     * loads game over scene
      */
-    public void EndOfLevel()
+    public void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    private void CheckWin()
     {
         if (_player.FinalShape(_goalShape, _numOfSquares))
         {
-            print("LEVEL COMPLETE!");
+            print("LEVEL " + _level + " COMPLETE!");
             _level++;
-            InitializeLevel(_level);
-        }
-        else
-        {
-            print("GAME OVER");
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("Level" + _level);
         }
     }
     
