@@ -50,7 +50,7 @@ public class Levels : MonoBehaviour
         },
     };
 
-    private int[] _levelTimes = { 10, 20, 30, 40, 50, 60 };
+    private int[] _levelTimes = { 20, 30, 40, 50, 60, 60 };
     
     private int[] _levelNumOfSquares = { 1, 5, 9, 13, 17, 21 };
 

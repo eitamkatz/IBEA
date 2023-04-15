@@ -103,6 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
   squareCount: 1
+  winCheck: 0
+  endOfLevel: 0
   speed: 0.05
 --- !u!61 &2155995286416836975
 BoxCollider2D:

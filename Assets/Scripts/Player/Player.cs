@@ -23,10 +23,15 @@ public class Player : MonoBehaviour
     private Vector3 _targetPosition;
     private float _timeToMove = 0.2f;
     private float _timer;
-    
+
     private void Awake()
     {
         Shared = this;
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -34,7 +39,7 @@ public class Player : MonoBehaviour
         CheckInput();
         // RotationPlayer();
     }
-    
+
     public void MergeShapes(GameObject toMerge)
     {
         // merge the new game object to the player
@@ -43,6 +48,7 @@ public class Player : MonoBehaviour
             toMerge.transform.GetChild(i).tag = "Player";
             squareCount++;
         }
+
         toMerge.tag = "Player";
         toMerge.transform.SetParent(transform);
     }
@@ -54,8 +60,8 @@ public class Player : MonoBehaviour
             direction = Vector2.zero;
             return;
         }
-        
-        if (Input.GetKeyDown(KeyCode.RightArrow)) 
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
             direction = Vector2.right;
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
             direction = Vector2.left;
@@ -69,10 +75,11 @@ public class Player : MonoBehaviour
             StartCoroutine(RotationPlayer(direction));
             direction = Vector2.zero;
         }
-        if(!_isMooving)
+
+        if (!_isMooving)
             StartCoroutine(UpdateMovement(direction));
     }
-    
+
     private IEnumerator RotationPlayer(Vector2 prevDirection)
     {
         Quaternion startRotation = transform.rotation;
@@ -87,6 +94,7 @@ public class Player : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
         direction = prevDirection;
         transform.rotation = endRotation;
     }
@@ -107,6 +115,7 @@ public class Player : MonoBehaviour
             loopTime += Time.deltaTime;
             yield return null;
         }
+
         transform.position = _targetPosition;
         _isMooving = false;
 
@@ -124,8 +133,8 @@ public class Player : MonoBehaviour
         int n = target.GetLength(0);
         if (dstSquareCount != squareCount) return false;
         // initialize the indexes from the center to the top left corner
-        int xIndex = - n / 2 + 1;
-        int yIndex = - n / 2 + 1;
+        int xIndex = -n / 2 + 1;
+        int yIndex = -n / 2 + 1;
         //moving on all the connects shapes
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -139,14 +148,15 @@ public class Player : MonoBehaviour
                 Vector2 index = currentSquare.localPosition;
                 xIndex += (int)index.x;
                 yIndex += (int)index.y;
-                
-                if (!MatchCheck(xIndex, yIndex, n-1, target[xIndex, yIndex]))
+
+                if (!MatchCheck(xIndex, yIndex, n - 1, target[xIndex, yIndex]))
                     return false;
             }
         }
+
         return true;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Wall"))
@@ -154,9 +164,18 @@ public class Player : MonoBehaviour
     }
 
     private bool MatchCheck(int xIndex, int yIndex, int n, int hasSquare)
-    {    
+    {
         // return false if the currentSquare location doesnt match the target shape or the current square is off limits
         return !(xIndex < 0 || xIndex > n || yIndex < 0 || yIndex > n || hasSquare == 0);
     }
-    
+
+    public void NewLevel()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        transform.position = new Vector3(0f, 0f, 0f);
+        print(transform.position); 
+    }
 }

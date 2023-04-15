@@ -16,10 +16,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Levels _levels;
     [SerializeField] private Player _player;
     [SerializeField] private Timer _timer;
+    [SerializeField] private GameManager _gameManager;
+    
+    //     if (_gameManager == null)
+    //     {
+    //         _gameManager = this;
+    //         DontDestroyOnLoad(this);
+    //     }
+    //     else if (_gameManager != this)
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    //     InitializeLevel(_level);
+    // } 
 
     private void Start()
     {
         _level = 0;
+        DontDestroyOnLoad(this);
         InitializeLevel(_level);
         // PrintShape(_goalShape);
     }
@@ -40,6 +54,7 @@ public class GameManager : MonoBehaviour
         _numOfSquares = _levels.GetLevelNumOfSquares(_level);
         // _shapeDisplay.UpdateGrid(_gridSize);
         // _shapeDisplay.DisplayShape(_goalShape);
+        _player.NewLevel();
         _levelTime = _levels.GetLevelTime(_level);
         _timer.StartTimer(_levelTime);
     }
@@ -59,6 +74,7 @@ public class GameManager : MonoBehaviour
             print("LEVEL " + _level + " COMPLETE!");
             _level++;
             SceneManager.LoadScene("Level" + _level);
+            InitializeLevel(_level);
         }
     }
     

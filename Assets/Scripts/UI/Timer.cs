@@ -11,6 +11,11 @@ public class Timer : MonoBehaviour
     private bool _timerOn;
     [SerializeField] private Text timerText;
     [SerializeField] private GameManager _gameManager;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(transform.root.gameObject);
+    }
     
     public void StartTimer(int timeLeft)
     {
