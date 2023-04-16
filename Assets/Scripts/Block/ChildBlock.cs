@@ -31,7 +31,7 @@ public class ChildBlock : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         // gameObject.SetActive(false);
         yield return new WaitForSeconds(PARTICLE_DELAY);
-        Player.Shared.squareCount--;
+        Player.Shared._numOfSquares--;
         Destroy(gameObject);
     }
     

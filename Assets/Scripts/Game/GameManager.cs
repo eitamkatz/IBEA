@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Player.Shared.endOfLevel)
+        if (Player.Shared.winCheck)
            CheckWin();
     }
 
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckWin()
     {
-        if (_player.FinalShape(_goalShape, _numOfSquares))
+        if (_player.CheckShapeMatch(_goalShape, _numOfSquares))
         {
             print("LEVEL " + _level + " COMPLETE!");
             _level++;
