@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private Timer _timer;
     [SerializeField] private GameManager _gameManager;
+    [SerializeField] private GameObject _play;
     
     //     if (_gameManager == null)
     //     {
@@ -40,14 +41,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Player.Shared.winCheck)
-           CheckWin();
+        if (_player.winCheck)
+        {
+            _player.winCheck = false;
+            
+        }
     }
 
+    
     /*
      * Initializes the level 
      */
-    void InitializeLevel(int level)
+    private void InitializeLevel(int level)
     {
         print("LEVEL " + level);
         _goalShape = _levels.GetLevelShape(_level);
@@ -67,14 +72,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    private void CheckWin()
+    public void NextLevel()
     {
-        if (_player.CheckShapeMatch(_goalShape, _numOfSquares))
+        if (!_player.winCheck)
         {
             print("LEVEL " + _level + " COMPLETE!");
             _level++;
             SceneManager.LoadScene("Level" + _level);
             InitializeLevel(_level);
+            _play.transform.position = Vector3.zero;
         }
     }
     

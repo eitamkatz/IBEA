@@ -8,6 +8,8 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -20,6 +22,7 @@ public class Player : MonoBehaviour
     public bool winCheck = false;
     // public bool endOfLevel = false;
     [SerializeField] private float speed = 0.05f;
+    [SerializeField] private GameManager _gameManager;
     private bool _isMooving;
     private Vector3 _orignalPosition;
     private Vector3 _targetPosition;
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        transform.position = Vector3.zero;
         DontDestroyOnLoad(this);
         _numOfSquares = 1;
         _maxX = 0;
@@ -183,6 +187,51 @@ public class Player : MonoBehaviour
     //     // return false if the currentSquare location doesnt match the target shape or the current square is off limits
     //     return !(xIndex < 0 || xIndex > n || yIndex < 0 || yIndex > n || hasSquare == 0);
     // }
+    public bool FinalShape(int[,] target, int dstSquareCount)
+    {
+        // int n = target.GetLength(0);
+        //
+        // if (dstSquareCount != squareCount) return false;
+        // // initialize the indexes from the center to the top left corner
+        // int xIndex = -n / 2 + 1;
+        // int yIndex = -n / 2 + 1;
+        // //moving on all the connects shapes
+        // for (int i = 0; i < transform.childCount; i++)
+        // {
+        //     Transform currentChild = transform.GetChild(i);
+        //     xIndex = (int)currentChild.localPosition.x;
+        //     yIndex = (int)currentChild.localPosition.y;
+        //     // moving on all the squares of the current shape
+        //     for (int j = 0; j < currentChild.childCount; j++)
+        //     {
+        //         Transform currentSquare = currentChild.GetChild(j);
+        //         Vector2 index = currentSquare.localPosition;
+        //         xIndex += (int)index.x;
+        //         yIndex += (int)index.y;
+        //         // print(xIndex+ ", "+ yIndex );
+        //         if (!MatchCheck(xIndex, yIndex, n - 1, target[xIndex, yIndex]))
+        //             return false;
+        //     }
+        // }
+        
+        return true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            winCheck = true;
+        }
+    }
+
+
+
+    private bool MatchCheck(int xIndex, int yIndex, int n, int hasSquare)
+    {
+        // return false if the currentSquare location doesnt match the target shape or the current square is off limits
+        return !(xIndex < 0 || xIndex > n || yIndex < 0 || yIndex > n || hasSquare == 0);
+    }
 
     public void NewLevel()
     {
@@ -255,4 +304,5 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, rayLength, checkLayer);
         return hit.collider != null;
     }
+    
 }
