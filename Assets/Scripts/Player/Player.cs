@@ -6,6 +6,8 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -16,8 +18,10 @@ public class Player : MonoBehaviour
     public Vector2 direction = Vector2.zero;
     public int squareCount = 1;
     public bool winCheck = false;
-    public bool endOfLevel = false;
+    public bool lossCheck = false;
+    // public bool endOfLevel = false;
     [SerializeField] private float speed = 0.05f;
+    [SerializeField] private GameManager _gameManager;
     private bool _isMooving;
     private Vector3 _orignalPosition;
     private Vector3 _targetPosition;
@@ -31,13 +35,13 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        transform.position = Vector3.zero;
         DontDestroyOnLoad(this);
     }
 
     private void Update()
     {
         CheckInput();
-        // RotationPlayer();
     }
 
     public void MergeShapes(GameObject toMerge)
@@ -60,7 +64,6 @@ public class Player : MonoBehaviour
             direction = Vector2.zero;
             return;
         }
-
         if (Input.GetKeyDown(KeyCode.RightArrow))
             direction = Vector2.right;
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -118,9 +121,9 @@ public class Player : MonoBehaviour
 
         transform.position = _targetPosition;
         _isMooving = false;
-
-        if (winCheck)
-            endOfLevel = true;
+        
+        // if (winCheck)
+        //     endOfLevel = true;
     }
 
 
@@ -130,38 +133,55 @@ public class Player : MonoBehaviour
     //dstSquareCount- the number of squares on the target shape
     public bool FinalShape(int[,] target, int dstSquareCount)
     {
-        int n = target.GetLength(0);
-        if (dstSquareCount != squareCount) return false;
-        // initialize the indexes from the center to the top left corner
-        int xIndex = -n / 2 + 1;
-        int yIndex = -n / 2 + 1;
-        //moving on all the connects shapes
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Transform currentChild = transform.GetChild(i);
-            xIndex = (int)currentChild.localPosition.x;
-            yIndex = (int)currentChild.localPosition.y;
-            // moving on all the squares of the current shape
-            for (int j = 0; j < currentChild.childCount; j++)
-            {
-                Transform currentSquare = currentChild.GetChild(j);
-                Vector2 index = currentSquare.localPosition;
-                xIndex += (int)index.x;
-                yIndex += (int)index.y;
-
-                if (!MatchCheck(xIndex, yIndex, n - 1, target[xIndex, yIndex]))
-                    return false;
-            }
-        }
-
+        // int n = target.GetLength(0);
+        //
+        // if (dstSquareCount != squareCount) return false;
+        // // initialize the indexes from the center to the top left corner
+        // int xIndex = -n / 2 + 1;
+        // int yIndex = -n / 2 + 1;
+        // //moving on all the connects shapes
+        // for (int i = 0; i < transform.childCount; i++)
+        // {
+        //     Transform currentChild = transform.GetChild(i);
+        //     xIndex = (int)currentChild.localPosition.x;
+        //     yIndex = (int)currentChild.localPosition.y;
+        //     // moving on all the squares of the current shape
+        //     for (int j = 0; j < currentChild.childCount; j++)
+        //     {
+        //         Transform currentSquare = currentChild.GetChild(j);
+        //         Vector2 index = currentSquare.localPosition;
+        //         xIndex += (int)index.x;
+        //         yIndex += (int)index.y;
+        //         // print(xIndex+ ", "+ yIndex );
+        //         if (!MatchCheck(xIndex, yIndex, n - 1, target[xIndex, yIndex]))
+        //             return false;
+        //     }
+        // }
+        
         return true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (other.CompareTag("Wall"))
+        {
             winCheck = true;
+            StartCoroutine(WinOrLoss());
+        }
+        else if (other.CompareTag("LossCondition"))
+            lossCheck = true;
     }
+    
+    public IEnumerator WinOrLoss()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if(lossCheck)
+            _gameManager.GameOver();
+        else 
+            _gameManager.NextLevel();
+    }
+
+
 
     private bool MatchCheck(int xIndex, int yIndex, int n, int hasSquare)
     {
@@ -176,6 +196,9 @@ public class Player : MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
         }
         transform.position = new Vector3(0f, 0f, 0f);
+        winCheck = false;
+        lossCheck = false;
         print(transform.position); 
     }
+    
 }

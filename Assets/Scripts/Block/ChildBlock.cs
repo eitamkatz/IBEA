@@ -19,10 +19,13 @@ public class ChildBlock : MonoBehaviour
         {
             StartCoroutine(DestroySquare());
         }
-        else if (other.gameObject.CompareTag("Wall"))
+        else if (other.gameObject.CompareTag("Wall") && !transform.CompareTag("Block"))
         {
+            StartCoroutine(Player.Shared.WinOrLoss());
             Player.Shared.winCheck = true;
         }
+        else if (other.CompareTag("LossCondition") && !transform.CompareTag("Block"))
+            Player.Shared.lossCheck = true;
     }
     
     private IEnumerator DestroySquare()
