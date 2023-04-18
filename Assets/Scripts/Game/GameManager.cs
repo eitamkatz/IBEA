@@ -9,15 +9,15 @@ public class GameManager : MonoBehaviour
 {
     private int _level;
     private int[,] _goalShape;
-    private int _numOfSquares;
+    private int _LevelSquareCount;
     private int _levelTime;
     // [SerializeField] private ShapeDisplay _shapeDisplay;
     // [SerializeField] private ShapeGenerator _shapeGenerator;
     [SerializeField] private Levels _levels;
     [SerializeField] private Player _player;
     [SerializeField] private Timer _timer;
-    [SerializeField] private GameManager _gameManager;
-    [SerializeField] private GameObject _play;
+    // [SerializeField] private GameObject _play;
+    public bool WinCondition { get; set; }
     
     //     if (_gameManager == null)
     //     {
@@ -41,13 +41,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (_player.winCheck)
+        if (WinCondition)
         {
-            _player.winCheck = false;
-            
+            CheckWinCondition();
         }
     }
-
     
     /*
      * Initializes the level 
@@ -56,12 +54,12 @@ public class GameManager : MonoBehaviour
     {
         print("LEVEL " + level);
         _goalShape = _levels.GetLevelShape(_level);
-        _numOfSquares = _levels.GetLevelNumOfSquares(_level);
+        _LevelSquareCount = _levels.GetLevelNumOfSquares(_level);
         // _shapeDisplay.UpdateGrid(_gridSize);
         // _shapeDisplay.DisplayShape(_goalShape);
-        _player.NewLevel();
         _levelTime = _levels.GetLevelTime(_level);
         _timer.StartTimer(_levelTime);
+        _player.NewLevel();
     }
     
     /*
@@ -72,29 +70,45 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
-    public void NextLevel()
+    public void CheckWinCondition()
     {
-        if (!_player.winCheck)
+        if (CheckShapeMatch())
         {
             print("LEVEL " + _level + " COMPLETE!");
             _level++;
             SceneManager.LoadScene("Level" + _level);
             InitializeLevel(_level);
-            _play.transform.position = Vector3.zero;
         }
+    }
+    
+    public bool CheckShapeMatch()
+    {
+        List<Vector2> playerShape = _player.PlayerShape;
+        if (playerShape.Count != _LevelSquareCount) return false;
+        for (int row = 0; row < _goalShape.GetLength(0); row++)
+        {
+            for (int col = 0; col < _goalShape.GetLength(1); col++)
+            {
+                Vector4 _shapeLimits = _player.getShapeLimits();
+                Vector2 relativePos = new Vector2(_shapeLimits.x + col, _shapeLimits.w - row);
+                if (_goalShape[row, col] == 0 && playerShape.Contains(relativePos)) return false;
+                if (_goalShape[row, col] == 1 && !playerShape.Contains(relativePos)) return false;
+            }
+        }
+        return true;
     }
     
     /*
      * prints a given shape (for testing!)
      */
-    void PrintShape(int[,] shape)
-    {
-        for (int i = 0; i < shape.GetLength(0); i++)
-        {
-            for (int j = 0; j < shape.GetLength(1); j++)
-            {
-                print(shape[i, j]);
-            }
-        }
-    }
+    // void PrintShape(int[,] shape)
+    // {
+    //     for (int i = 0; i < shape.GetLength(0); i++)
+    //     {
+    //         for (int j = 0; j < shape.GetLength(1); j++)
+    //         {
+    //             print(shape[i, j]);
+    //         }
+    //     }
+    // }
 }

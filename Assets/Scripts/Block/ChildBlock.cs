@@ -19,13 +19,6 @@ public class ChildBlock : MonoBehaviour
         {
             StartCoroutine(DestroySquare());
         }
-        else if (other.gameObject.CompareTag("Wall") && !transform.CompareTag("Block"))
-        {
-            StartCoroutine(Player.Shared.WinOrLoss());
-            Player.Shared.winCheck = true;
-        }
-        else if (other.CompareTag("LossCondition") && !transform.CompareTag("Block"))
-            Player.Shared.lossCheck = true;
     }
     
     private IEnumerator DestroySquare()
@@ -34,7 +27,7 @@ public class ChildBlock : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         // gameObject.SetActive(false);
         yield return new WaitForSeconds(PARTICLE_DELAY);
-        Player.Shared._numOfSquares--;
+        // Player.Shared._numOfSquares--;
         Destroy(gameObject);
     }
     
