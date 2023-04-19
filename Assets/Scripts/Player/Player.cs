@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     // public bool endOfLevel = false;
     [SerializeField] private float speed = 0.05f;
     private bool _isMooving;
+    private bool _inRotation;
     private Vector3 _orignalPosition;
     private Vector3 _targetPosition;
     private float _timeToMove = 0.2f;
@@ -87,7 +88,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow))
             direction = Vector2.down;
         if (Walls.Contains(direction)) direction = Vector2.zero;
-        else if (Input.GetKeyDown(KeyCode.Space) && !_)
+        else if (Input.GetKeyDown(KeyCode.Space) && !_inRotation)
         {
             StartCoroutine(RotationPlayer(direction));
             direction = Vector2.zero;
@@ -99,6 +100,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator RotationPlayer(Vector2 prevDirection)
     {
+        _inRotation = true;
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = startRotation * Quaternion.Euler(0f, 0f, -90f);
         float rotateTime = 0.3f; // Time to complete the rotation (in seconds)
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour
         RotatePlayerShape();
         direction = prevDirection;
         transform.rotation = endRotation;
+        _inRotation = false;
     }
 
     private IEnumerator UpdateMovement(Vector3 moveDirection)
