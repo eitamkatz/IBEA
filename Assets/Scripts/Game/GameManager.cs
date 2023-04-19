@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
+    /*
+     * check
+     */
     public void CheckWinCondition()
     {
         if (CheckShapeMatch())
