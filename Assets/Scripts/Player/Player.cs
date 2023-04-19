@@ -87,11 +87,12 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow))
             direction = Vector2.down;
         if (Walls.Contains(direction)) direction = Vector2.zero;
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) && !_)
         {
             StartCoroutine(RotationPlayer(direction));
             direction = Vector2.zero;
         }
+        // print(Input.GetKey(KeyCode.RightArrow));
         if (!_isMooving)
             StartCoroutine(UpdateMovement(direction));
     }
@@ -214,6 +215,7 @@ public class Player : MonoBehaviour
 
     public void NewLevel()
     {
+        Walls = new List<Vector2>();
         PlayerShape = new List<Vector2>() { new Vector2(0f, 0f) };
         for (int i = 0; i < transform.childCount; i++)
         {
