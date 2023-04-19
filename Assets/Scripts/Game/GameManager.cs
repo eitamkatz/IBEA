@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
      */
     public void CheckWinCondition()
     {
+        print("check win");
         if (CheckShapeMatch())
         {
             print("LEVEL " + _level + " COMPLETE!");

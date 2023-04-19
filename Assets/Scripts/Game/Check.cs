@@ -15,6 +15,7 @@ public class Check : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        print("check collision");
         if (CompareTag("Check")) _gameManager.WinCondition = true;
         if (CompareTag("InvisibleCheck")) CheckEnter();
     }

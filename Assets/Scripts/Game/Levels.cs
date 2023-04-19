@@ -19,7 +19,7 @@ public class Levels : MonoBehaviour
             { 1, 1, 1, 1 },
             { 0, 1, 1, 0 },
             { 1, 1, 1, 0 },
-            { 0, 0, 0, 0 },
+            { 0, 0, 0, 0},
         },
         new[,] 
         {
@@ -52,7 +52,7 @@ public class Levels : MonoBehaviour
 
     private int[] _levelTimes = { 20, 30, 40, 50, 60, 90 };
     
-    private int[] _levelNumOfSquares = { 1, 5, 10, 13, 17, 21 };
+    private int[] _levelNumOfSquares = { 1, 5, 9, 13, 20, 49 };
 
     public int[,] GetLevelShape(int level)
     {
