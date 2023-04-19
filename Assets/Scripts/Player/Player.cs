@@ -49,9 +49,9 @@ public class Player : MonoBehaviour
     {
         Walls = new List<Vector2>();
         transform.position = Vector3.zero;
-        DontDestroyOnLoad(this);
         _shapeLimits = new Vector4();
         PlayerShape = new List<Vector2>() { new Vector2(0f, 0f) };
+        
     }
 
     private void Update()

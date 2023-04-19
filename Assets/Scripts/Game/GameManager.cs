@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +15,9 @@ public class GameManager : MonoBehaviour
     // [SerializeField] private ShapeDisplay _shapeDisplay;
     // [SerializeField] private ShapeGenerator _shapeGenerator;
     [SerializeField] private Levels _levels;
-    [SerializeField] private Player _player;
+    private Player _player;
     [SerializeField] private Timer _timer;
-    // [SerializeField] private GameObject _play;
+    [SerializeField] private GameObject _playerPrefab;
     public bool WinCondition { get; set; }
     
     //     if (_gameManager == null)
@@ -59,7 +60,9 @@ public class GameManager : MonoBehaviour
         // _shapeDisplay.DisplayShape(_goalShape);
         _levelTime = _levels.GetLevelTime(_level);
         _timer.StartTimer(_levelTime);
-        _player.NewLevel();
+        // _player.NewLevel();
+        _player = GameObject.Find("Player").GetComponent<Player>();
+
     }
     
     /*
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
     public bool CheckShapeMatch()
     {
         List<Vector2> playerShape = _player.PlayerShape;
+        print(playerShape.Count);
         if (playerShape.Count != _LevelSquareCount) return false;
         for (int row = 0; row < _goalShape.GetLength(0); row++)
         {

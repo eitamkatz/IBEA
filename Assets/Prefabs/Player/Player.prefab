@@ -102,9 +102,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
-  winCheck: 0
   speed: 0.05
-  _numOfSquares: 0
+  rayLength: 0.8
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &2155995286416836975
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -198,7 +200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2155995287449159506
 Transform:
   m_ObjectHideFlags: 0
