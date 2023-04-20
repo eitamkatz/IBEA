@@ -82,18 +82,22 @@ public class Player : MonoBehaviour
 
     public void MergeShapes(GameObject toMerge)
     {
-        // merge the new game object to the player
-        for (int i = 0; i < toMerge.transform.childCount; i++)
+        if (!_inRotation)
         {
-            toMerge.transform.GetChild(i).tag = "Player";
-            float posX = (float)Math.Round(toMerge.transform.GetChild(i).position.x - transform.position.x);
-            float posY = (float)Math.Round(toMerge.transform.GetChild(i).position.y - transform.position.y);
-            Merge(new Vector2(posX, posY));
-            // squareCount++;
-        }
+            // merge the new game object to the player
+            for (int i = 0; i < toMerge.transform.childCount; i++)
+            {
+                toMerge.transform.GetChild(i).tag = "Player";
+                float posX = (float)Math.Round(toMerge.transform.GetChild(i).position.x - transform.position.x);
+                float posY = (float)Math.Round(toMerge.transform.GetChild(i).position.y - transform.position.y);
+                Merge(new Vector2(posX, posY));
+                // squareCount++;
+            }
 
-        toMerge.tag = "Player";
-        toMerge.transform.SetParent(transform);
+            toMerge.tag = "Player";
+            toMerge.transform.SetParent(transform);
+        }
+        
     }
 
     private void CheckInput()

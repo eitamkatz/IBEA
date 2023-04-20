@@ -267,9 +267,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1818293801955719699, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1818293802969166889, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818293802969166889, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1818293802969166889, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
       propertyPath: m_IsActive
@@ -318,6 +326,18 @@ PrefabInstance:
     - target: {fileID: 1818293802969166892, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818293802969166895, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1818293802969166895, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6775002555974986343, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
