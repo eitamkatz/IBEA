@@ -26,8 +26,9 @@ public class Player : MonoBehaviour
     // public bool winCheck = false;
 
     // public bool endOfLevel = false;
-    [SerializeField] private float speed = 0.05f;
-    private bool _isMooving;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private Transform movePoint;
+    private bool _isMooving = false;
     private bool _inRotation;
     private Vector3 _orignalPosition;
     private Vector3 _targetPosition;
@@ -54,12 +55,27 @@ public class Player : MonoBehaviour
         // transform.position = Vector3.zero;
         _shapeLimits = new Vector4();
         PlayerShape = new List<Vector2>() { new Vector2(0f, 0f) };
-        
+        movePoint.parent = null;
     }
 
     private void Update()
     {
-        CheckInput();
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, speed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f && !_inRotation)
+        {
+            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if(Math.Abs(input.x) > 0.01f)
+                movePoint.position += new Vector3(input.x, 0f, 0f);
+            else if(Math.Abs(input.y) > 0.01f)
+                movePoint.position += new Vector3(0f, input.y, 0f);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space) && !_inRotation)
+        {
+            StartCoroutine(RotationPlayer(direction));
+            direction = Vector2.zero;
+        }
+        // CheckInput();
         // RotationPlayer();
         // isWalled = IsTouchingWall();
     }
@@ -82,6 +98,7 @@ public class Player : MonoBehaviour
 
     private void CheckInput()
     {
+        
         direction = Vector2.zero;
         if (Input.GetKey(KeyCode.RightArrow))
             direction = Vector2.right;
@@ -92,15 +109,15 @@ public class Player : MonoBehaviour
         else if (Input.GetKey(KeyCode.DownArrow))
             direction = Vector2.down;
         
-        if (Walls.Contains(direction)) direction = Vector2.zero;
-        else if (Input.GetKeyDown(KeyCode.Space) && !_inRotation)
+        // if (Walls.Contains(direction)) direction = Vector2.zero;
+        if (Input.GetKeyDown(KeyCode.Space) && !_inRotation)
         {
             StartCoroutine(RotationPlayer(direction));
             direction = Vector2.zero;
         }
-
-        if (!_isMooving)
-            StartCoroutine(UpdateMovement(direction));
+        // Move();
+        // if (!_isMooving)
+        //     StartCoroutine(UpdateMovement(direction));
     }
 
     private IEnumerator RotationPlayer(Vector2 prevDirection)
@@ -123,11 +140,12 @@ public class Player : MonoBehaviour
         transform.rotation = endRotation;
         _inRotation = false;
     }
+    
 
     private IEnumerator UpdateMovement(Vector3 moveDirection)
     {
-        if (Time.time - _timer > speed)
-            _isMooving = true;
+        // if (Time.time - _timer > speed)
+        _isMooving = true;
         float loopTime = 0f;
 
         _orignalPosition = transform.position;
