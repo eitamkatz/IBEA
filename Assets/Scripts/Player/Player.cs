@@ -36,8 +36,8 @@ public class Player : MonoBehaviour
     public List<Vector2> Walls { get; set; }
     private Vector4 _shapeLimits;// (minX, maxX, minY, maxY)
     public List<Vector2> PlayerShape { get; private set; }
-    [SerializeField] private float rayLength = 0.8f;
-    [SerializeField] private LayerMask wallLayer = default;
+    // [SerializeField] private float rayLength = 0.8f;
+    // [SerializeField] private LayerMask wallLayer = default;
 
     public List<Vector2> Get_Player_shape()
     {
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         Walls = new List<Vector2>();
-        transform.position = Vector3.zero;
+        // transform.position = Vector3.zero;
         _shapeLimits = new Vector4();
         PlayerShape = new List<Vector2>() { new Vector2(0f, 0f) };
         
@@ -82,21 +82,23 @@ public class Player : MonoBehaviour
 
     private void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        direction = Vector2.zero;
+        if (Input.GetKey(KeyCode.RightArrow))
             direction = Vector2.right;
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
             direction = Vector2.left;
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.UpArrow))
             direction = Vector2.up;
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow))
             direction = Vector2.down;
+        
         if (Walls.Contains(direction)) direction = Vector2.zero;
         else if (Input.GetKeyDown(KeyCode.Space) && !_inRotation)
         {
             StartCoroutine(RotationPlayer(direction));
             direction = Vector2.zero;
         }
-        // print(Input.GetKey(KeyCode.RightArrow));
+
         if (!_isMooving)
             StartCoroutine(UpdateMovement(direction));
     }

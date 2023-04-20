@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1470972709}
-  _gameManager: {fileID: 0}
+  _gameManager: {fileID: 1726353097}
 --- !u!114 &1470972709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,7 +769,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726353093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 111c19ed544fd4efaa8ccaddfaee95fa, type: 3}
   m_Name: 
@@ -802,7 +802,6 @@ MonoBehaviour:
   _levels: {fileID: 1726353096}
   _player: {fileID: 914171815}
   _timer: {fileID: 1470972708}
-  _playerPrefab: {fileID: 1818293802969166889, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
 --- !u!4 &1726353098
 Transform:
   m_ObjectHideFlags: 0

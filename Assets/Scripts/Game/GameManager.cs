@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Levels _levels;
     [SerializeField] private GameObject _player;
     [SerializeField] private Timer _timer;
-    [SerializeField] private GameObject _playerPrefab;
+    // [SerializeField] private GameObject _playerPrefab;
      
     public bool WinCondition { get; set; }
     
@@ -35,11 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // _level = 0;
-        // DontDestroyOnLoad(this);
         InitializeLevel(_level);
-        // _timer = GameObject.Find("TimerText").GetComponent<Timer>();
-        // PrintShape(_goalShape);
     }
 
     private void Update()
@@ -62,9 +58,8 @@ public class GameManager : MonoBehaviour
         // _shapeDisplay.DisplayShape(_goalShape);
         _levelTime = _levels.GetLevelTime(_level);
         _timer.StartTimer(_levelTime);
-        // _player.NewLevel();
-        _player = null;
-        _player = GameObject.Find("Player");
+        // _player = null;
+        // _player = GameObject.Find("Player");
         
     }
     

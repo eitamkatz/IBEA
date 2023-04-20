@@ -17,7 +17,7 @@ public class Levels : MonoBehaviour
         new[,]
         {
             { 1, 1, 1, 1 },
-            { 0, 1, 1, 0 },
+            { 1, 1, 0, 0 },
             { 1, 1, 1, 0 },
             { 0, 0, 0, 0},
         },
