@@ -14,7 +14,7 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(transform.root.gameObject);
+        // DontDestroyOnLoad(transform.root.gameObject);
     }
     
     public void StartTimer(int timeLeft)

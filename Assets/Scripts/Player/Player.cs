@@ -39,7 +39,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float rayLength = 0.8f;
     [SerializeField] private LayerMask wallLayer = default;
 
-
+    public List<Vector2> Get_Player_shape()
+    {
+        return PlayerShape;
+    }
     private void Awake()
     {
         Shared = this;
