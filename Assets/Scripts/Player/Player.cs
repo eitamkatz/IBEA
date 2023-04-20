@@ -22,10 +22,7 @@ public class Player : MonoBehaviour
     public static Player Shared { get; private set; }
 
     public Vector2 direction = Vector2.zero;
-    // public int squareCount = 1;
-    // public bool winCheck = false;
-
-    // public bool endOfLevel = false;
+    
     [SerializeField] private float speed = 5f;
     [SerializeField] private Transform movePoint;
     private bool _isMooving = false;
@@ -34,6 +31,7 @@ public class Player : MonoBehaviour
     private Vector3 _targetPosition;
     private float _timeToMove = 0.2f;
     private float _timer;
+    private bool[] _canMove = {true, true, true, true};
     public List<Vector2> Walls { get; set; }
     private Vector4 _shapeLimits;// (minX, maxX, minY, maxY)
     public List<Vector2> PlayerShape { get; private set; }
@@ -64,6 +62,16 @@ public class Player : MonoBehaviour
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f && !_inRotation)
         {
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            print(_canMove[0] + " " + _canMove[1] + " " + _canMove[2] + " " + _canMove[3]);
+            if(_canMove[0] == false && input.x == 1)
+                input.x = 0;
+            else if (_canMove[1] == false && input.x == -1)
+                input.x = 0;
+            else if (_canMove[2] == false && input.y == 1)
+                input.y = 0;
+            else if (_canMove[3] == false && input.y == -1)
+                input.y = 0;
+            
             if(Math.Abs(input.x) > 0.01f)
                 movePoint.position += new Vector3(input.x, 0f, 0f);
             else if(Math.Abs(input.y) > 0.01f)
@@ -169,6 +177,29 @@ public class Player : MonoBehaviour
         //     endOfLevel = true;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Right"))
+            _canMove[0] = false;
+        else if (other.CompareTag("Left"))
+            _canMove[1] = false;
+        else if (other.CompareTag("Up"))
+            _canMove[2] = false;
+        else if (other.CompareTag("Down"))
+            _canMove[3] = false;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Right"))
+            _canMove[0] = true;
+        else if (other.CompareTag("Left"))
+            _canMove[1] = true;
+        else if (other.CompareTag("Up"))
+            _canMove[2] = true;
+        else if (other.CompareTag("Down"))
+            _canMove[3] = true;
+    }
 
 
     //target- array of the target shape 
