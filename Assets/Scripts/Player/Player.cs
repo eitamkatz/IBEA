@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f && !_inRotation)
         {
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            print(_canMove[0] + " " + _canMove[1] + " " + _canMove[2] + " " + _canMove[3]);
+            // print(_canMove[0] + " " + _canMove[1] + " " + _canMove[2] + " " + _canMove[3]);
             if(_canMove[0] == false && input.x == 1)
                 input.x = 0;
             else if (_canMove[1] == false && input.x == -1)

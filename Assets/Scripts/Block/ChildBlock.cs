@@ -17,7 +17,8 @@ public class ChildBlock : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Bomb"))
         {
-            StartCoroutine(DestroySquare());
+            Destroy(transform.parent.gameObject);
+            // StartCoroutine(DestroySquare());
         }
     }
     
@@ -28,7 +29,8 @@ public class ChildBlock : MonoBehaviour
         // gameObject.SetActive(false);
         yield return new WaitForSeconds(PARTICLE_DELAY);
         // Player.Shared._numOfSquares--;
-        Destroy(gameObject);
+        if(transform.parent.gameObject)
+            Destroy(transform.parent.gameObject);
     }
     
     private IEnumerator UpdatePosition(GameObject parent)
