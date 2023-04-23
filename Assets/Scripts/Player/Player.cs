@@ -110,7 +110,6 @@ public class Player : MonoBehaviour
 
     private void CheckInput()
     {
-        
         direction = Vector2.zero;
         if (Input.GetKey(KeyCode.RightArrow))
             direction = Vector2.right;

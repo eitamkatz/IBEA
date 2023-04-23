@@ -13,14 +13,14 @@ public class Check : MonoBehaviour
         _gameManager.WinCondition = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         print("check collision");
         if (CompareTag("Check")) _gameManager.WinCondition = true;
         if (CompareTag("InvisibleCheck")) CheckEnter();
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (CompareTag("Check")) _gameManager.WinCondition = false;
     }
