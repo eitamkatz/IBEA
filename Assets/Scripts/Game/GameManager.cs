@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeLevel(_level);
+    }
+    
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene("level" + _level);
     }
 
     private void Update()
@@ -117,4 +123,5 @@ public class GameManager : MonoBehaviour
     //         }
     //     }
     // }
+    
 }
