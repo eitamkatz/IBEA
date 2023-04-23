@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Shared { get; private set; }
     [SerializeField] private int _level;
     private int[,] _goalShape;
     private int _LevelSquareCount;
@@ -33,7 +34,10 @@ public class GameManager : MonoBehaviour
     //     }
     //     InitializeLevel(_level);
     // } 
-
+    private void Awake()
+    {
+        Shared = this;
+    }
     private void Start()
     {
         InitializeLevel(_level);

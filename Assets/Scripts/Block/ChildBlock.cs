@@ -20,6 +20,10 @@ public class ChildBlock : MonoBehaviour
             Destroy(transform.parent.gameObject);
             // StartCoroutine(DestroySquare());
         }
+        else if (other.CompareTag("restart"))
+        {
+            GameManager.Shared.RestartLevel();
+        }
     }
     
     private IEnumerator DestroySquare()
