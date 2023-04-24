@@ -90,8 +90,14 @@ public class GameManager : MonoBehaviour
         if (CheckShapeMatch())
         {
             print("LEVEL " + _level + " COMPLETE!");
-            _level++;
-            SceneManager.LoadScene("Level" + _level);
+            
+            if (_level == 5)
+                SceneManager.LoadScene("Winning");
+            else
+            {
+                _level++;
+                SceneManager.LoadScene("Level" + _level);
+            }
             InitializeLevel(_level);
         }
     }
@@ -99,7 +105,6 @@ public class GameManager : MonoBehaviour
     public bool CheckShapeMatch()
     {
         List<Vector2> playerShape = _player.GetComponent<Player>().Get_Player_shape();
-        print(playerShape.Count != _LevelSquareCount);
         if (playerShape.Count != _LevelSquareCount) return false;
         for (int row = 0; row < _goalShape.GetLength(0); row++)
         {

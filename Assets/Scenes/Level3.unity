@@ -437,6 +437,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 5.0088
       objectReference: {fileID: 0}
+    - target: {fileID: 3214616148256399168, guid: 08feae2dfd1db7b4c8f3831c51f9dab0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.6062698
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214616148256399168, guid: 08feae2dfd1db7b4c8f3831c51f9dab0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.0688
+      objectReference: {fileID: 0}
     - target: {fileID: 6047733202831119648, guid: 08feae2dfd1db7b4c8f3831c51f9dab0, type: 3}
       propertyPath: m_Name
       value: Frame
