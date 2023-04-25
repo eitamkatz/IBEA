@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     private Vector3 _orignalPosition;
     private Vector3 _targetPosition;
     private float _timeToMove = 0.2f;
-    private float _timer;
+    // private float _timer;
     private bool[] _canMove = {true, true, true, true};
     public List<Vector2> Walls { get; set; }
     private Vector4 _shapeLimits;// (minX, maxX, minY, maxY)
