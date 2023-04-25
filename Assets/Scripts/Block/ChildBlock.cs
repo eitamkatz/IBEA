@@ -7,7 +7,7 @@ public class ChildBlock : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag.Equals("Player"))
+        if (other.CompareTag("Player") && !Player.Shared.GetInRotation())
         {
             Player.Shared.MergeShapes(gameObject.transform.parent.gameObject);
             StartCoroutine(

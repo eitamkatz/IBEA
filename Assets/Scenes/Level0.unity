@@ -288,6 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384702489}
   - component: {fileID: 384702488}
+  - component: {fileID: 384702490}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -307,7 +308,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a47e46e7f7ba54cf782eb0460213304c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.34
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -406,6 +407,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &384702490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384702487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98b5db6599924800a4443cfa4617864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &567882657
 GameObject:
   m_ObjectHideFlags: 0
@@ -6981,6 +6994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371128447}
   - component: {fileID: 1371128446}
+  - component: {fileID: 1371128448}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -7000,7 +7014,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 592e4b67bd8514aeeac45e0f4d175d03, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.51
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7099,6 +7113,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1371128448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371128445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98b5db6599924800a4443cfa4617864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1530604943
 GameObject:
   m_ObjectHideFlags: 0
@@ -7201,7 +7227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1641572467
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7443,7 +7469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1954234231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7647,11 +7673,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1818293802969166892, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1818293802969166892, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1818293802969166892, guid: 81a4ef9c1758e43d99b47b3f1f1d9278, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7863,6 +7889,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8681059093875546260, guid: 0129f9fc0b0ee48b088f43b3130c9d0a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8681059093875546263, guid: 0129f9fc0b0ee48b088f43b3130c9d0a, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}

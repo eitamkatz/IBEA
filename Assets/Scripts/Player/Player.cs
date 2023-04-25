@@ -42,6 +42,11 @@ public class Player : MonoBehaviour
     {
         return PlayerShape;
     }
+
+    public bool GetInRotation()
+    {
+        return _inRotation;
+    }
     private void Awake()
     {
         Shared = this;
@@ -80,6 +85,7 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) && !_inRotation)
         {
+            _inRotation = true;
             StartCoroutine(RotationPlayer(direction));
             direction = Vector2.zero;
         }
@@ -141,7 +147,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator RotationPlayer(Vector2 prevDirection)
     {
-        _inRotation = true;
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = startRotation * Quaternion.Euler(0f, 0f, -90f);
         float rotateTime = 0.3f; // Time to complete the rotation (in seconds)
