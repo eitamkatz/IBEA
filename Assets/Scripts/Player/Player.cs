@@ -21,10 +21,10 @@ public class Player : MonoBehaviour
 {
     public static Player Shared { get; private set; }
 
-    public Vector2 direction = Vector2.zero;
+    public Vector2 direction;
     
     [SerializeField] private float speed = 5f;
-    [SerializeField] private Transform movePoint;
+    [SerializeField] public Transform movePoint;
     private bool _isMooving = false;
     private bool _inRotation;
     private Vector3 _orignalPosition;
@@ -112,14 +112,22 @@ public class Player : MonoBehaviour
     {
         direction = Vector2.zero;
         if (Input.GetKey(KeyCode.RightArrow))
+        {
             direction = Vector2.right;
+        }
         else if (Input.GetKey(KeyCode.LeftArrow))
+        {
             direction = Vector2.left;
+        }
         else if (Input.GetKey(KeyCode.UpArrow))
+        {
             direction = Vector2.up;
+        }
         else if (Input.GetKey(KeyCode.DownArrow))
+        {
             direction = Vector2.down;
-        
+        }
+
         // if (Walls.Contains(direction)) direction = Vector2.zero;
         if (Input.GetKeyDown(KeyCode.Space) && !_inRotation)
         {

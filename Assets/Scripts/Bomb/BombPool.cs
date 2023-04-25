@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class BombPool : MonoBehaviour
 {
     public static BombPool Shared { get; private set; }
-    [SerializeField] private Bomb template = default;
+    [SerializeField] private Bomb template;
     private Transform _playerPosition;
     private ObjectPool<Bomb> _pool;
     private Vector3 _startPosition;

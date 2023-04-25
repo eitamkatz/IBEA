@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class ShapePool : MonoBehaviour
 {
     public static ShapePool Shared { get; private set; }
-    [SerializeField] private Block[] template = default;
+    [SerializeField] private Block[] template;
     private Transform _playerPosition;
     private ObjectPool<Block> _pool;
     private Vector3 _startPosition;
@@ -14,7 +12,7 @@ public class ShapePool : MonoBehaviour
     private float maxGapX = 13f;
     private float minGapY = 7f;
     private float maxGapY = 15f;
-    private int count = 0;
+    private int count;
     
     private void Awake()
     {
