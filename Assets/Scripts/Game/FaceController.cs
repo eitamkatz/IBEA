@@ -15,29 +15,17 @@ public class FaceController : MonoBehaviour
     {
         Vector2 direction = player.movePoint.position - player.transform.position;
         if (direction == Vector2.zero)
-        {
             faceImage.sprite = faceSprites[0];
-            return;
-        }
         else if (direction.x > 0 && direction.y == 0)
-        {
             faceImage.sprite = faceSprites[1];
-            return;
-        }
         else if (direction.x < 0 && direction.y == 0)
-        {
             faceImage.sprite = faceSprites[2];
-            return;
-        }
         else if (direction.y > 0 && direction.x == 0)
-        {
             faceImage.sprite = faceSprites[3];
-            return;
-        }
         else if (direction.y < 0 && direction.x == 0)
-        {
             faceImage.sprite = faceSprites[4];
-            return;
-        }
+        if (Math.Abs(player.transform.position.x - 0.5f) < 0.5f ||
+            Math.Abs(player.transform.position.y - 0.5f) < 0.5f)
+            faceImage.sprite = faceSprites[0];
     }
 }

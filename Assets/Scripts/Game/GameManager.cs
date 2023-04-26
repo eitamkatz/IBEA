@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     // [SerializeField] private ShapeGenerator _shapeGenerator;
     [SerializeField] private Levels _levels;
     [SerializeField] private GameObject _player;
+    [SerializeField] private LoadingScreen loadingScreen;
     // [SerializeField] private Timer _timer;
     // [SerializeField] private GameObject _playerPrefab;
      
@@ -46,9 +47,9 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (WinCondition)
-        {
             CheckWinCondition();
-        }
+        else if (Input.GetKey(KeyCode.Escape))
+            GameOver();
     }
     
     /*
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
     private void InitializeLevel(int level)
     {
         print("LEVEL " + level);
+        StartCoroutine(loadingScreen.LoadLoadingScreen());
         _goalShape = _levels.GetLevelShape(_level);
         _LevelSquareCount = _levels.GetLevelNumOfSquares(_level);
         // _shapeDisplay.UpdateGrid(_gridSize);

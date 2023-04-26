@@ -34,7 +34,7 @@ public class Level0Tutorial : MonoBehaviour
         tutorialImage.sprite = welcomeTutorial;
         tutorialImage.color = Color.white;
         tutorialStage++;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(8f);
         tutorialImage.sprite = arrowsTutorial; 
         tutorialStage++;
     }

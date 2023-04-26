@@ -7,11 +7,9 @@ using UnityEngine.UI;
 public class Level1Tutorial : MonoBehaviour
 {
     [SerializeField] private Sprite connectTutorial;
-    [SerializeField] private Sprite bombTutorial;
     [SerializeField] private Sprite rotationTutorial;
     [SerializeField] private Image tutorialImage;
     [SerializeField] private Player player;
-    [SerializeField] private GameObject bomb;
     private int tutorialStage = 0;
     // Start is called before the first frame update
     void Start()
@@ -26,10 +24,6 @@ public class Level1Tutorial : MonoBehaviour
         {
             StartCoroutine(RotationTutorial());
         }
-        // if (tutorialStage == 2 && player.PlayerShape.Count == 1)
-        // {
-        //     StartCoroutine(RotationTutorial());
-        // }
         if (tutorialStage == 2 && Input.GetKey(KeyCode.Space))
         {
             tutorialImage.color = Color.clear;
@@ -44,14 +38,6 @@ public class Level1Tutorial : MonoBehaviour
         yield return 0;
     }
     
-    // IEnumerator BombTutorial()
-    // {
-    //     tutorialImage.sprite = bombTutorial;
-    //     tutorialImage.color = Color.white;
-    //     bomb.active = true;
-    //     tutorialStage++;
-    //     yield return 0;
-    // }
     
     IEnumerator RotationTutorial()
     {
