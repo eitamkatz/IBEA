@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
      */
     public void GameOver()
     {
+        Destroy(GameObject.Find("Music"));
+        Destroy(GameObject.Find("AudioManager"));
         SceneManager.LoadScene("GameOver");
     }
 
