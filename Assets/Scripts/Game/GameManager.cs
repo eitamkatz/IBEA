@@ -9,27 +9,13 @@ public class GameManager : MonoBehaviour
     private int[,] _goalShape;
     private int _LevelSquareCount;
     private int _levelTime;
-    // [SerializeField] private ShapeDisplay _shapeDisplay;
-    // [SerializeField] private ShapeGenerator _shapeGenerator;
     [SerializeField] private Levels _levels;
     [SerializeField] private GameObject _player;
     [SerializeField] private LoadingScreen loadingScreen;
-    // [SerializeField] private Timer _timer;
-    // [SerializeField] private GameObject _playerPrefab;
+
      
     public bool WinCondition { get; set; }
     
-    //     if (_gameManager == null)
-    //     {
-    //         _gameManager = this;
-    //         DontDestroyOnLoad(this);
-    //     }
-    //     else if (_gameManager != this)
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    //     InitializeLevel(_level);
-    // } 
     private void Awake()
     {
         Shared = this;

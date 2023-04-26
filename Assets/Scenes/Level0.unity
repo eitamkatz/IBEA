@@ -460,7 +460,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a47e46e7f7ba54cf782eb0460213304c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.34
+  m_Volume: 0.317
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7041,8 +7041,8 @@ MonoBehaviour:
   - {fileID: 1679715658}
   - {fileID: 1236986491}
   - {fileID: 1929572226}
-  audioManager: {fileID: 384702487}
-  music: {fileID: 1371128445}
+  audioManager: {fileID: 384702488}
+  music: {fileID: 1371128446}
 --- !u!114 &1151195275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7520,7 +7520,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 592e4b67bd8514aeeac45e0f4d175d03, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.51
+  m_Volume: 0.487
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8513,7 +8513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9056604, g: 0.03844783, b: 0.03844783, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
