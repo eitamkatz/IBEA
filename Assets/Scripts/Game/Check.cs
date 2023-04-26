@@ -12,7 +12,6 @@ public class Check : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("check collision");
         if (CompareTag("Check")) _gameManager.WinCondition = true;
         if (CompareTag("InvisibleCheck")) CheckEnter();
     }
@@ -22,17 +21,9 @@ public class Check : MonoBehaviour
         if (CompareTag("Check")) _gameManager.WinCondition = false;
     }
 
-    // private void OnTriggerEnter2D(Collider2D col)
-    // {
-    //     if (CompareTag("Check")) _gameManager.WinCondition = true;
-    //     if (CompareTag("InvisibleCheck")) CheckEnter();
-    // }
-    //
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (CompareTag("Check")) _gameManager.WinCondition = false;
-    // }
-
+    /*
+     * check if the player has entered the invisible check
+     */
     private void CheckEnter()
     {
         if (_gameManager.CheckShapeMatch()) GetComponent<Collider2D>().enabled = false;

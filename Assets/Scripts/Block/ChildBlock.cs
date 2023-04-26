@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ChildBlock : MonoBehaviour
 {
-    private const float PARTICLE_DELAY = 1f;
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !Player.Shared.GetInRotation())
@@ -16,25 +14,16 @@ public class ChildBlock : MonoBehaviour
         else if (other.gameObject.CompareTag("Bomb"))
         {
             Destroy(transform.parent.gameObject);
-            // StartCoroutine(DestroySquare());
         }
         else if (other.CompareTag("restart"))
         {
             GameManager.Shared.RestartLevel();
         }
     }
-    
-    private IEnumerator DestroySquare()
-    {
-        GetComponent<ParticleSystem>().Play();
-        GetComponent<SpriteRenderer>().enabled = false;
-        // gameObject.SetActive(false);
-        yield return new WaitForSeconds(PARTICLE_DELAY);
-        // Player.Shared._numOfSquares--;
-        if(transform.parent.gameObject)
-            Destroy(transform.parent.gameObject);
-    }
-    
+
+    /* 
+     * Rounds the position of the parent object to the nearest integer after it merge to the player
+     */
     private IEnumerator UpdatePosition(GameObject parent)
     {
         yield return new WaitForSeconds(0.03f);
@@ -42,6 +31,4 @@ public class ChildBlock : MonoBehaviour
             Mathf.Round(parent.transform.localPosition.x),
             Mathf.Round(parent.transform.localPosition.y), 0f);
     }
-
-    
 }

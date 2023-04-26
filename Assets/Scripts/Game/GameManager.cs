@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Shared { get; private set; }
-    [SerializeField] private int _level;
+    [SerializeField] private int level;
+    [SerializeField] private Levels levels;
+    [SerializeField] private GameObject player;
+    [SerializeField] private LoadingScreen loadingScreen;
     private int[,] _goalShape;
     private int _LevelSquareCount;
     private int _levelTime;
-    [SerializeField] private Levels _levels;
-    [SerializeField] private GameObject _player;
-    [SerializeField] private LoadingScreen loadingScreen;
 
 
     public bool WinCondition { get; set; }
@@ -22,12 +23,12 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        InitializeLevel(_level);
+        InitializeLevel();
     }
     
     public void RestartLevel()
     {
-        SceneManager.LoadScene("Level" + _level);
+        SceneManager.LoadScene("Level" + level);
     }
 
     private void Update()
@@ -41,19 +42,11 @@ public class GameManager : MonoBehaviour
     /*
      * Initializes the level 
      */
-    private void InitializeLevel(int level)
+    private void InitializeLevel()
     {
-        print("LEVEL " + level);
         StartCoroutine(loadingScreen.LoadLoadingScreen());
-        _goalShape = _levels.GetLevelShape(_level);
-        _LevelSquareCount = _levels.GetLevelNumOfSquares(_level);
-        // _shapeDisplay.UpdateGrid(_gridSize);
-        // _shapeDisplay.DisplayShape(_goalShape);
-        // _levelTime = _levels.GetLevelTime(_level);
-        // _timer.StartTimer(_levelTime);
-        // _player = null;
-        // _player = GameObject.Find("Player");
-
+        _goalShape = levels.GetLevelShape(level);
+        _LevelSquareCount = levels.GetLevelNumOfSquares(level);
     }
     
     /*
@@ -65,35 +58,35 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-     * check
+     * checks if the player has won the level
      */
     public void CheckWinCondition()
     {
-        print("check win");
         if (CheckShapeMatch())
         {
-            print("LEVEL " + _level + " COMPLETE!");
-            
-            if (_level == 5)
+            if (level == 5)
                 SceneManager.LoadScene("Winning");
             else
             {
-                _level++;
-                SceneManager.LoadScene("Level" + _level);
+                level++;
+                SceneManager.LoadScene("Level" + level);
             }
-            InitializeLevel(_level);
+            InitializeLevel();
         }
     }
     
+    /*
+     * check if the player's shape matches the goal shape
+     */
     public bool CheckShapeMatch()
     {
-        List<Vector2> playerShape = _player.GetComponent<Player>().Get_Player_shape();
+        List<Vector2> playerShape = player.GetComponent<Player>().Get_Player_shape();
         if (playerShape.Count != _LevelSquareCount) return false;
         for (int row = 0; row < _goalShape.GetLength(0); row++)
         {
             for (int col = 0; col < _goalShape.GetLength(1); col++)
             {
-                Vector4 _shapeLimits = _player.GetComponent<Player>().getShapeLimits();
+                Vector4 _shapeLimits = player.GetComponent<Player>().getShapeLimits();
                 Vector2 relativePos = new Vector2(_shapeLimits.x + col, _shapeLimits.w - row);
                 if (_goalShape[row, col] == 0 && playerShape.Contains(relativePos)) return false;
                 if (_goalShape[row, col] == 1 && !playerShape.Contains(relativePos)) return false;
@@ -101,19 +94,4 @@ public class GameManager : MonoBehaviour
         }
         return true;
     }
-    
-    /*
-     * prints a given shape (for testing!)
-     */
-    // void PrintShape(int[,] shape)
-    // {
-    //     for (int i = 0; i < shape.GetLength(0); i++)
-    //     {
-    //         for (int j = 0; j < shape.GetLength(1); j++)
-    //         {
-    //             print(shape[i, j]);
-    //         }
-    //     }
-    // }
-    
 }

@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>English</string>
     <key>CFBundleExecutable</key>
-    <string>template-clone</string>
+    <string>IBEA</string>
     <key>CFBundleGetInfoString</key>
     <string>Unity Player version 2021.3.21f1 (1b156197d683). (c) 2023 Unity Technologies ApS. All rights reserved.</string>
     <key>CFBundleIconFile</key>
@@ -15,7 +15,7 @@
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>template-clone</string>
+    <string>IBEA</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>

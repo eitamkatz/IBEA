@@ -7,35 +7,33 @@ using Image = UnityEngine.UI.Image;
 public class Level0Tutorial : MonoBehaviour
 {
     [SerializeField] private Sprite welcomeTutorial;
-    [SerializeField] private Sprite arrowsTutorial; 
+    [SerializeField] private Sprite arrowsTutorial;
     [SerializeField] private Image tutorialImage;
-    private int tutorialStage = 0;
-    
+    private int _tutorialStage = 0;
 
-
-    void Start()
+    private void Start()
     {
         StartCoroutine(ArrowsTutorial());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow) ||
+        if (Input.GetKey(KeyCode.RightArrow) ||
+            Input.GetKey(KeyCode.LeftArrow) ||
             Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
         {
-            if (tutorialStage == 2)
+            if (_tutorialStage == 2)
                 tutorialImage.color = Color.clear;
         }
     }
 
-    IEnumerator ArrowsTutorial()
+    private IEnumerator ArrowsTutorial()
     {
         tutorialImage.sprite = welcomeTutorial;
         tutorialImage.color = Color.white;
-        tutorialStage++;
+        _tutorialStage++;
         yield return new WaitForSeconds(8f);
-        tutorialImage.sprite = arrowsTutorial; 
-        tutorialStage++;
+        tutorialImage.sprite = arrowsTutorial;
+        _tutorialStage++;
     }
 }

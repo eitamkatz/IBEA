@@ -11,24 +11,9 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private Image loadingScreenImage;
     [SerializeField] private Sprite[] loadingScreens;
     [SerializeField] private Image[] boxes;
-    [SerializeField] private AudioSource audioManager;
-    [SerializeField] private AudioSource music;
-
-    // private void Awake()
-    // {
-    //     DontDestroyOnLoad(this);
-    // }
-
-    private void Start()
-    {
-        // audioManager = GameObject.Find("AudioManager").GetComponent<AudioSource>();
-        // music = GameObject.Find("Music").GetComponent<AudioSource>();
-    }
 
     public IEnumerator LoadLoadingScreen()
     {
-        // audioManager.volume = 0.5f;
-        // music.Pause();
         int index = Random.Range(0, loadingScreens.Length);
         loadingScreenImage.sprite = loadingScreens[index];
         loadingScreenImage.enabled = true;
@@ -44,7 +29,5 @@ public class LoadingScreen : MonoBehaviour
         }
         loadingScreenImage.color = Color.clear;
         loadingScreenImage.enabled = false;
-        // audioManager.volume = 0.34f;
-        // music.Play();
     }
 }
