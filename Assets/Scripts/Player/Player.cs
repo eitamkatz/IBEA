@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     
     [SerializeField] private float speed = 5f;
     [SerializeField] public Transform movePoint;
-    private bool _isMooving = false;
+    // private bool _isMooving = false;
     private bool _inRotation;
     private Vector3 _orignalPosition;
     private Vector3 _targetPosition;
@@ -68,18 +68,18 @@ public class Player : MonoBehaviour
         {
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             // print(_canMove[0] + " " + _canMove[1] + " " + _canMove[2] + " " + _canMove[3]);
-            if(_canMove[0] == false && input.x == 1)
+            if(_canMove[0] == false && input.x.Equals(1))
                 input.x = 0;
-            else if (_canMove[1] == false && input.x == -1)
+            else if (_canMove[1] == false && input.x.Equals(-1))
                 input.x = 0;
-            else if (_canMove[2] == false && input.y == 1)
+            else if (_canMove[2] == false && input.y.Equals(1))
                 input.y = 0;
-            else if (_canMove[3] == false && input.y == -1)
+            else if (_canMove[3] == false && input.y.Equals(-1))
                 input.y = 0;
             
-            if(Math.Abs(input.x) > 0.01f)
+            if(!Math.Abs(input.x).Equals(0))
                 movePoint.position += new Vector3(input.x, 0f, 0f);
-            else if(Math.Abs(input.y) > 0.01f)
+            else if(!Math.Abs(input.y).Equals(0))
                 movePoint.position += new Vector3(0f, input.y, 0f);
         }
         
@@ -169,7 +169,7 @@ public class Player : MonoBehaviour
     private IEnumerator UpdateMovement(Vector3 moveDirection)
     {
         // if (Time.time - _timer > speed)
-        _isMooving = true;
+        // _isMooving = true;
         float loopTime = 0f;
 
         _orignalPosition = transform.position;
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
         }
 
         transform.position = _targetPosition;
-        _isMooving = false;
+        // _isMooving = false;
         // if (winCheck)
         //     endOfLevel = true;
     }
