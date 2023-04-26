@@ -6,36 +6,36 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Start.unity
+    path: Assets/Scenes/Screens/Start.unity
     guid: ea7217cc9733e2c4e954670a1e12d474
   - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/GameOver.unity
+    path: Assets/Scenes/Screens/GameOver.unity
     guid: 940f7a0aacc59554b8d47313c8e1037e
   - enabled: 1
-    path: Assets/Scenes/Level0.unity
+    path: Assets/Scenes/Levels/Level0.unity
     guid: fb0b62fa5e5768b4e8fdd84cbe96b1c6
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Levels/Level1.unity
     guid: 28268829ab6ac024f9ace4b1c151d0ef
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
+    path: Assets/Scenes/Levels/Level2.unity
     guid: 1c0804c1ef11d4f87a00b2cd1d0ae096
   - enabled: 1
-    path: Assets/Scenes/Level3.unity
+    path: Assets/Scenes/Levels/Level3.unity
     guid: 20e1cd260cf8c7a4596e2413102eff0b
   - enabled: 1
-    path: Assets/Scenes/Level4.unity
+    path: Assets/Scenes/Levels/Level4.unity
     guid: c892d35779b7b42098e6e97fc4f45690
   - enabled: 1
-    path: Assets/Scenes/Level5.unity
+    path: Assets/Scenes/Levels/Level5.unity
     guid: d6b38d650da0542b2958100319534872
   - enabled: 1
-    path: Assets/Scenes/Winning.unity
+    path: Assets/Scenes/Screens/Winning.unity
     guid: 10889a8055c5c43578fddf01c7d66d6d
   m_configObjects: {}

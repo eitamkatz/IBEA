@@ -223,30 +223,14 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].outWeight
       value: 0.33333334
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8108918767848245095, guid: db4c01d26af80448fa15de833a0cd9d4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: db4c01d26af80448fa15de833a0cd9d4, type: 3}
 --- !u!4 &3978994239732431675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1922191564137943457, guid: db4c01d26af80448fa15de833a0cd9d4, type: 3}
   m_PrefabInstance: {fileID: 3284466799355259546}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3978994239732431676 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1922191564137943462, guid: db4c01d26af80448fa15de833a0cd9d4, type: 3}
-  m_PrefabInstance: {fileID: 3284466799355259546}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4193456115755970637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3978994239732431676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e312a0976d4c3c459160955c258892e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8476426656615235314
 PrefabInstance:
   m_ObjectHideFlags: 0
