@@ -47,8 +47,7 @@ public class Player : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position,
             movePoint.position, speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, movePoint.position) <=
-            0.05f && !_inRotation)
+        if (Vector3.Distance(transform.position, movePoint.position).Equals(0) && !_inRotation)
         {
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"),
                 Input.GetAxisRaw("Vertical"));

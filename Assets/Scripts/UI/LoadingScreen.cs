@@ -21,7 +21,7 @@ public class LoadingScreen : MonoBehaviour
         foreach (var box in boxes)
         {
             box.color = Color.white;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
         }
         foreach (var box in boxes)
         {
