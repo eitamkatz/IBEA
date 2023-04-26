@@ -18,14 +18,14 @@ public class LoadingScreen : MonoBehaviour
         loadingScreenImage.sprite = loadingScreens[index];
         loadingScreenImage.enabled = true;
         loadingScreenImage.color = Color.white;
-        for (int i = 0; i < boxes.Length; i++)
+        foreach (var box in boxes)
         {
-            boxes[i].color = Color.white;
+            box.color = Color.white;
             yield return new WaitForSeconds(0.5f);
         }
-        for (int i = 0; i < boxes.Length; i++)
+        foreach (var box in boxes)
         {
-            boxes[i].color = Color.clear;
+            box.color = Color.clear;
         }
         loadingScreenImage.color = Color.clear;
         loadingScreenImage.enabled = false;

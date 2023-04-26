@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private LoadingScreen loadingScreen;
     private int[,] _goalShape;
-    private int _LevelSquareCount;
+    private int _levelSquareCount;
     private int _levelTime;
 
 
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(loadingScreen.LoadLoadingScreen());
         _goalShape = levels.GetLevelShape(level);
-        _LevelSquareCount = levels.GetLevelNumOfSquares(level);
+        _levelSquareCount = levels.GetLevelNumOfSquares(level);
     }
     
     /*
@@ -81,13 +81,13 @@ public class GameManager : MonoBehaviour
     public bool CheckShapeMatch()
     {
         List<Vector2> playerShape = player.GetComponent<Player>().Get_Player_shape();
-        if (playerShape.Count != _LevelSquareCount) return false;
+        if (playerShape.Count != _levelSquareCount) return false;
         for (int row = 0; row < _goalShape.GetLength(0); row++)
         {
             for (int col = 0; col < _goalShape.GetLength(1); col++)
             {
-                Vector4 _shapeLimits = player.GetComponent<Player>().getShapeLimits();
-                Vector2 relativePos = new Vector2(_shapeLimits.x + col, _shapeLimits.w - row);
+                Vector4 shapeLimits = player.GetComponent<Player>().GetShapeLimits();
+                Vector2 relativePos = new Vector2(shapeLimits.x + col, shapeLimits.w - row);
                 if (_goalShape[row, col] == 0 && playerShape.Contains(relativePos)) return false;
                 if (_goalShape[row, col] == 1 && !playerShape.Contains(relativePos)) return false;
             }

@@ -22,14 +22,12 @@ public class Player : MonoBehaviour
     public static Player Shared { get; private set; }
     public List<Vector2> PlayerShape { get; private set; }
     public Vector2 direction;
-    public List<Vector2> Walls { get; set; }
+    public List<Vector2> walls;
     [SerializeField] public Transform movePoint;
     [SerializeField] private float speed = 5f;
     private bool[] _canMove = { true, true, true, true };
     private bool _inRotation;
     private Vector4 _shapeLimits; // (minX, maxX, minY, maxY)
-    private Vector3 _orignalPosition;
-    private Vector3 _targetPosition;
 
 
     private void Awake()
@@ -39,7 +37,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        Walls = new List<Vector2>();
+        walls = new List<Vector2>();
         _shapeLimits = new Vector4();
         PlayerShape = new List<Vector2>() { new Vector2(0f, 0f) };
         movePoint.parent = null;
@@ -165,7 +163,7 @@ public class Player : MonoBehaviour
             _canMove[3] = true;
     }
     /*
-     * add the cordinats of the added shape to the PlayerShape of the player
+     * add the coordinates of the added shape to the PlayerShape of the player
      */
     private void Merge(Vector2 position)
     {
@@ -177,7 +175,7 @@ public class Player : MonoBehaviour
     }
 
     /*
-     * update the cordinats of the PlayerShape of the player while rotation
+     * update the coordinates of the PlayerShape of the player while rotation
      */
     private void RotatePlayerShape()
     {
@@ -196,7 +194,7 @@ public class Player : MonoBehaviour
     /*
      * return the limits of the player shape
      */
-    public Vector4 getShapeLimits()
+    public Vector4 GetShapeLimits()
     {
         return _shapeLimits;
     }
