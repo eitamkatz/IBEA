@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private LoadingScreen loadingScreen;
 
-     
+
     public bool WinCondition { get; set; }
     
     private void Awake()
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     
     public void RestartLevel()
     {
-        SceneManager.LoadScene("level" + _level);
+        SceneManager.LoadScene("Level" + _level);
     }
 
     private void Update()
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         // _timer.StartTimer(_levelTime);
         // _player = null;
         // _player = GameObject.Find("Player");
-        
+
     }
     
     /*

@@ -21,8 +21,8 @@ public class LoadingScreen : MonoBehaviour
 
     private void Start()
     {
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioSource>();
-        music = GameObject.Find("Music").GetComponent<AudioSource>();
+        // audioManager = GameObject.Find("AudioManager").GetComponent<AudioSource>();
+        // music = GameObject.Find("Music").GetComponent<AudioSource>();
     }
 
     public IEnumerator LoadLoadingScreen()
@@ -31,6 +31,7 @@ public class LoadingScreen : MonoBehaviour
         // music.Pause();
         int index = Random.Range(0, loadingScreens.Length);
         loadingScreenImage.sprite = loadingScreens[index];
+        loadingScreenImage.enabled = true;
         loadingScreenImage.color = Color.white;
         for (int i = 0; i < boxes.Length; i++)
         {
@@ -42,6 +43,7 @@ public class LoadingScreen : MonoBehaviour
             boxes[i].color = Color.clear;
         }
         loadingScreenImage.color = Color.clear;
+        loadingScreenImage.enabled = false;
         // audioManager.volume = 0.34f;
         // music.Play();
     }
